@@ -24,7 +24,7 @@ namespace NEA
         public void displaycards()
         {
             Form1 formcont = new Form1();
-
+            cardsHidden= false;
             switch (playerwho)
             {
                 case 1:
@@ -74,6 +74,16 @@ namespace NEA
             InitializeComponent();
         }
 
+        public void nextTurn()
+        {
+            togglehide.Show();
+            label3.Show();
+            label4.Show();
+            button1.Show();
+            deckcard.Hide();
+            label1.Hide();
+        }
+
         public void showMidCards()
         {
             midcard1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.midhand[0] + ".png");
@@ -100,10 +110,7 @@ namespace NEA
                 case 3:
                     switch (playerwho)
                     {
-                        case 1:
-                            playerwho++;
-                            break;
-                        case 2:
+                        default:
                             playerwho++;
                             break;
                         case 3:
@@ -115,13 +122,7 @@ namespace NEA
                 case 4:
                     switch (playerwho)
                     {
-                        case 1:
-                            playerwho++;
-                            break;
-                        case 2:
-                            playerwho++;
-                            break;
-                        case 3:
+                        default:
                             playerwho++;
                             break;
                         case 4:
@@ -133,16 +134,7 @@ namespace NEA
                 case 5:
                     switch (playerwho)
                     {
-                        case 1:
-                            playerwho++;
-                            break;
-                        case 2:
-                            playerwho++;
-                            break;
-                        case 3:
-                            playerwho++;
-                            break;
-                        case 4:
+                        default:
                             playerwho++;
                             break;
                         case 5:
@@ -153,19 +145,7 @@ namespace NEA
                 case 6:
                     switch (playerwho)
                     {
-                        case 1:
-                            playerwho++;
-                            break;
-                        case 2:
-                            playerwho++;
-                            break;
-                        case 3:
-                            playerwho++;
-                            break;
-                        case 4:
-                            playerwho++;
-                            break;
-                        case 5:
+                        default:
                             playerwho++;
                             break;
                         case 6:
@@ -178,6 +158,7 @@ namespace NEA
 
         public void hidecards()
         {
+            cardsHidden= true;
             p1card1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\card back black.png");
             p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\card back black.png");
             p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\card back black.png");
@@ -201,12 +182,7 @@ namespace NEA
             {
                 displaycards();
             }
-            togglehide.Show();
-            label3.Show();
-            label4.Show();
-            button1.Show();
-            deckcard.Hide();
-            label1.Hide();
+            nextTurn();
 
             System.Diagnostics.Debug.WriteLine("");
         }
@@ -223,6 +199,78 @@ namespace NEA
             game.swapHand();
             displaycards();
             button1.Hide();
+        }
+
+        private bool midbeforehand = false;
+        private void midcard1_Click(object sender, EventArgs e)
+        {
+            if (midbeforehand == false)
+            {
+                game.swapCard1(0);
+                midbeforehand = true;
+            }
+        }
+
+        private void midcard2_Click(object sender, EventArgs e)
+        {
+            if (midbeforehand == false)
+            {
+                game.swapCard1(1);
+                midbeforehand = true;
+            }
+        }
+
+        private void midcard3_Click(object sender, EventArgs e)
+        {
+            if (midbeforehand == false)
+            {
+                game.swapCard1(2);
+                midbeforehand = true;
+
+            }
+        }
+
+
+        private void p1card1_Click(object sender, EventArgs e)
+        {
+            if (midbeforehand == true && cardsHidden == false)
+            {
+                game.swapCard2(0);
+                displaycards();
+                hidecards();
+                calcplayerwho();
+                deckcard.Show();
+                label1.Show();
+                midbeforehand= false;
+            }
+        }
+
+        private void p1card2_Click(object sender, EventArgs e)
+        {
+            if (midbeforehand == true && cardsHidden == false)
+            {
+                game.swapCard2(1);
+                displaycards();
+                hidecards();
+                calcplayerwho();
+                deckcard.Show();
+                label1.Show();
+                midbeforehand = false;
+            }
+        }
+
+        private void p1card3_Click(object sender, EventArgs e)
+        {
+            if (midbeforehand == true && cardsHidden == false)
+            {
+                game.swapCard2(2);
+                displaycards();
+                hidecards();
+                calcplayerwho();
+                deckcard.Show();
+                label1.Show();
+                midbeforehand = false;
+            }
         }
     }
 }

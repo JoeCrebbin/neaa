@@ -82,6 +82,7 @@
             this.p1card2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.p1card2.TabIndex = 2;
             this.p1card2.TabStop = false;
+            this.p1card2.Click += new System.EventHandler(this.p1card2_Click);
             // 
             // p1card1
             // 
@@ -93,6 +94,7 @@
             this.p1card1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.p1card1.TabIndex = 3;
             this.p1card1.TabStop = false;
+            this.p1card1.Click += new System.EventHandler(this.p1card1_Click);
             // 
             // p1card3
             // 
@@ -103,6 +105,7 @@
             this.p1card3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.p1card3.TabIndex = 4;
             this.p1card3.TabStop = false;
+            this.p1card3.Click += new System.EventHandler(this.p1card3_Click);
             // 
             // label2
             // 
@@ -123,6 +126,7 @@
             this.midcard3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.midcard3.TabIndex = 9;
             this.midcard3.TabStop = false;
+            this.midcard3.Click += new System.EventHandler(this.midcard3_Click);
             // 
             // midcard1
             // 
@@ -134,6 +138,7 @@
             this.midcard1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.midcard1.TabIndex = 8;
             this.midcard1.TabStop = false;
+            this.midcard1.Click += new System.EventHandler(this.midcard1_Click);
             // 
             // midcard2
             // 
@@ -144,6 +149,7 @@
             this.midcard2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.midcard2.TabIndex = 7;
             this.midcard2.TabStop = false;
+            this.midcard2.Click += new System.EventHandler(this.midcard2_Click);
             // 
             // togglehide
             // 
@@ -182,7 +188,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(520, 254);
+            this.button1.Location = new System.Drawing.Point(618, 145);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(92, 48);
             this.button1.TabIndex = 13;

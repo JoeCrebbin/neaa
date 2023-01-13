@@ -15,6 +15,10 @@ namespace NEA
         public static string[] p5hand = new string[3];
         public static string[] p6hand = new string[3];
         public static string[] midhand = new string[3];
+
+
+        public static int sharedindex; //this is here because i need a parameter from one swapcard to the other
+        public static string tempcard = string.Empty;
         public static Random rnd1 = new Random();
 
         public static void startGame(int pCount)
@@ -153,5 +157,54 @@ namespace NEA
             }
         }
 
+        public static void swapCard1(int midIndex)
+        {
+            sharedindex = midIndex;
+            tempcard = (midhand[midIndex]);
+
+        }
+        public static void swapCard2(int handIndex)
+        {
+            switch (playerwho)
+            {
+                case 1:
+                    {
+                        midhand[sharedindex] = p1hand[handIndex];
+                        p1hand[handIndex] = tempcard;
+                        break;
+                    }
+                case 2:
+                    {
+                        midhand[sharedindex] = p2hand[handIndex];
+                        p2hand[handIndex] = tempcard;
+                        break;
+                    }
+                case 3:
+                    {
+                        midhand[sharedindex] = p3hand[handIndex];
+                        p3hand[handIndex] = tempcard;
+                        break;
+                    }
+                case 4:
+                    {
+                        midhand[sharedindex] = p4hand[handIndex];
+                        p4hand[handIndex] = tempcard;
+                        break;
+                    }
+                case 5:
+                    {
+                        midhand[sharedindex] = p5hand[handIndex];
+                        p5hand[handIndex] = tempcard;
+                        break;
+                    }
+                case 6:
+                    {
+                        midhand[sharedindex] = p6hand[handIndex];
+                        p6hand[handIndex] = tempcard;
+                        break;
+                    }
+
+            }
+        }
     }
 }

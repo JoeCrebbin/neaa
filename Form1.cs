@@ -78,11 +78,10 @@ namespace NEA
         {
             togglehide.Show();
             label3.Show();
+            button1.Show();
             label4.Show();
             button1.Show();
-            deckcard.Hide();
             label1.Hide();
-            deckcard.Show();
         }
 
         public void showMidCards()
@@ -94,8 +93,9 @@ namespace NEA
 
         public static void calcplayerwho()
             {
-                switch (hmp.selectedp)
-            {
+                Form1 former = new Form1();
+            switch (hmp.selectedp)
+                {
                 case 2:
                     switch (playerwho)
                     {
@@ -154,7 +154,7 @@ namespace NEA
                             break;
                     }
                     break;
-            }
+                }
             }
 
         public void hidecards()
@@ -176,7 +176,7 @@ namespace NEA
                 p1card1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p1hand[0] + ".png");
                 p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p1hand[1] + ".png");
                 p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p1hand[2] + ".png");
-                label1.Text = "Next player";
+                label1.Text = "Show Hand";
 
             }
             else
@@ -184,13 +184,16 @@ namespace NEA
                 displaycards();
             }
             nextTurn();
-
+            label5.Show();
+            label5.Text = $"Player {playerwho}'s turn";
+            deckcard.Hide();
             System.Diagnostics.Debug.WriteLine("");
         }
         public void togglehide_Click(object sender, EventArgs e)
         {
             hidecards();
             calcplayerwho();
+            button1.Hide();
             deckcard.Show();
             label1.Show();
             togglehide.Hide();
@@ -199,12 +202,15 @@ namespace NEA
         private void button1_Click(object sender, EventArgs e)
         {
             game.swapHand();
+            deckcard.Show();
             displaycards();
             button1.Hide();
             hidecards();
             calcplayerwho();
             nextTurn();
             togglehide.Hide();
+            button1.Hide();
+            label5.Text = $"Player {playerwho}'s turn";
         }
 
         private bool midbeforehand = false;
@@ -247,7 +253,9 @@ namespace NEA
                 calcplayerwho();
                 deckcard.Show();
                 label1.Show();
-                midbeforehand= false;
+                button1.Hide();
+                midbeforehand = false;
+                label5.Text = $"Player {playerwho}'s turn";
                 togglehide.Hide();
             }
         }
@@ -261,8 +269,10 @@ namespace NEA
                 hidecards();
                 calcplayerwho();
                 deckcard.Show();
+                button1.Hide();
                 label1.Show();
                 midbeforehand = false;
+                label5.Text = $"Player {playerwho}'s turn";
                 togglehide.Hide();
             }
         }
@@ -277,7 +287,9 @@ namespace NEA
                 calcplayerwho();
                 deckcard.Show();
                 label1.Show();
+                button1.Hide();
                 midbeforehand = false;
+                label5.Text = $"Player {playerwho}'s turn";
                 togglehide.Hide();
             }
         }

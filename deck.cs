@@ -14,7 +14,6 @@ namespace NEA
         public void shuffleDeck()
         {
             var cardNum = new List<char>() { 'A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K' };
-// remember your notation is stupid and 1 is 2
             var cardSuit = new List<char>() { 'C', 'D', 'H', 'S' };
             for (int i = 0; i < 52; i++)
             {

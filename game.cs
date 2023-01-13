@@ -89,5 +89,69 @@ namespace NEA
             }
         }
 
+        public static void swapHand()
+        {
+            Form1 formc = new Form1();
+            string[] temphand = new string[3];
+
+            switch (playerwho)
+            {
+                case 1:
+                    {
+                        System.Diagnostics.Debug.WriteLine($"p1 hand {p1hand[0]}");
+                        temphand = p1hand;
+                        p1hand = midhand;
+                        midhand = temphand;
+                        System.Diagnostics.Debug.WriteLine($"p1 hand now {p1hand[0]} and playerwho is {playerwho}");
+                        break;
+                    }
+                case 2:
+                    {
+                        System.Diagnostics.Debug.WriteLine($"p2 hand {p2hand[0]}");
+                        temphand = p2hand;
+                        p2hand = midhand;
+                        midhand = temphand;
+                        System.Diagnostics.Debug.WriteLine($"p2 hand now {p2hand[0]} and playerwho is {playerwho}");
+                        break;
+                    }
+                case 3:
+                    {
+                        System.Diagnostics.Debug.WriteLine($"p3 hand {p3hand[0]}");
+                        temphand = p3hand;
+                        p3hand = midhand;
+                        midhand = temphand;
+                        System.Diagnostics.Debug.WriteLine($"p3 hand now {p3hand[0]} and playerwho is {playerwho}");
+                        break;
+                    }
+                case 4:
+                    {
+                        System.Diagnostics.Debug.WriteLine($"p4 hand {p4hand[0]}");
+                        temphand = p4hand;
+                        p4hand = midhand;
+                        midhand = temphand;
+                        System.Diagnostics.Debug.WriteLine($"p4 hand now {p4hand[0]} and playerwho is {playerwho}");
+                        break;
+                    }
+                case 5:
+                    {
+                        System.Diagnostics.Debug.WriteLine($"p5 hand {p5hand[0]}");
+                        temphand = p5hand;
+                        p5hand = midhand;
+                        midhand = temphand;
+                        System.Diagnostics.Debug.WriteLine($"p5 hand now {p5hand[0]} and playerwho is {playerwho}");
+                        break;
+                    }
+                case 6:
+                    {
+                        System.Diagnostics.Debug.WriteLine($"p6 hand {p6hand[0]}");
+                        temphand = p6hand;
+                        p6hand = midhand;
+                        midhand = temphand;
+                        System.Diagnostics.Debug.WriteLine($"p6 hand now {p6hand[0]} and playerwho is {playerwho}");
+                        break;
+                    }
+            }
+        }
+
     }
 }

@@ -21,6 +21,54 @@ namespace NEA
 
         public static Random rnd = new Random();
 
+        public void displaycards()
+        {
+            Form1 formcont = new Form1();
+
+            switch (playerwho)
+            {
+                case 1:
+                    p1card1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p1hand[0] + ".png");
+                    p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p1hand[1] + ".png");
+                    p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p1hand[2] + ".png");
+                    showMidCards();
+                    System.Diagnostics.Debug.WriteLine("it works!");
+                    break;
+                case 2:
+                    p1card1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p2hand[0] + ".png");
+                    p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p2hand[1] + ".png");
+                    p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p2hand[2] + ".png");
+                    showMidCards();
+
+                    break;
+                case 3:
+                    p1card1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p3hand[0] + ".png");
+                    p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p3hand[1] + ".png");
+                    p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p3hand[2] + ".png");
+                    showMidCards();
+                    break;
+                case 4:
+                    p1card1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p4hand[0] + ".png");
+                    p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p4hand[1] + ".png");
+                    p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p4hand[2] + ".png");
+                    showMidCards();
+                    break;
+                case 5:
+                    p1card1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p5hand[0] + ".png");
+                    p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p5hand[1] + ".png");
+                    p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p5hand[2] + ".png");
+                    showMidCards();
+                    break;
+                case 6:
+                    p1card1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p6hand[0] + ".png");
+                    p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p6hand[1] + ".png");
+                    p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p6hand[2] + ".png");
+                    showMidCards();
+                    break;
+            }
+
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -135,49 +183,7 @@ namespace NEA
             p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\card back black.png");
         }
 
-        public void displaycards()
-        {
-            switch (playerwho)
-            {
-                case 1:
-                    p1card1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p1hand[0] + ".png");
-                    p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p1hand[1] + ".png");
-                    p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p1hand[2] + ".png");
-                    showMidCards();
-                    break;
-                case 2:
-                    p1card1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p2hand[0] + ".png");
-                    p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p2hand[1] + ".png");
-                    p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p2hand[2] + ".png");
-                    showMidCards();
-                    break;
-                case 3:
-                    p1card1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p3hand[0] + ".png");
-                    p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p3hand[1] + ".png");
-                    p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p3hand[2] + ".png");
-                    showMidCards();
-                    break;
-                case 4:
-                    p1card1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p4hand[0] + ".png");
-                    p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p4hand[1] + ".png");
-                    p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p4hand[2] + ".png");
-                    showMidCards();
-                    break;
-                case 5:
-                    p1card1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p5hand[0] + ".png");
-                    p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p5hand[1] + ".png");
-                    p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p5hand[2] + ".png");
-                    showMidCards();
-                    break;
-                case 6:
-                    p1card1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p6hand[0] + ".png");
-                    p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p6hand[1] + ".png");
-                    p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p6hand[2] + ".png");
-                    showMidCards();
-                    break;
-            }
-
-        }
+        
         public void pictureBox1_Click(object sender, EventArgs e)
         {
 
@@ -189,19 +195,34 @@ namespace NEA
                 p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p1hand[1] + ".png");
                 p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p1hand[2] + ".png");
                 label1.Text = "Next player";
-                calcplayerwho();
 
             }
             else
             {
                 displaycards();
-                calcplayerwho();
             }
+            togglehide.Show();
+            label3.Show();
+            label4.Show();
+            button1.Show();
+            deckcard.Hide();
+            label1.Hide();
+
             System.Diagnostics.Debug.WriteLine("");
         }
         public void togglehide_Click(object sender, EventArgs e)
         {
             hidecards();
+            calcplayerwho();
+            deckcard.Show();
+            label1.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            game.swapHand();
+            displaycards();
+            button1.Hide();
         }
     }
 }

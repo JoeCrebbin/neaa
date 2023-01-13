@@ -82,6 +82,7 @@ namespace NEA
             button1.Show();
             deckcard.Hide();
             label1.Hide();
+            deckcard.Show();
         }
 
         public void showMidCards()
@@ -192,6 +193,7 @@ namespace NEA
             calcplayerwho();
             deckcard.Show();
             label1.Show();
+            togglehide.Hide();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -199,6 +201,10 @@ namespace NEA
             game.swapHand();
             displaycards();
             button1.Hide();
+            hidecards();
+            calcplayerwho();
+            nextTurn();
+            togglehide.Hide();
         }
 
         private bool midbeforehand = false;
@@ -242,6 +248,7 @@ namespace NEA
                 deckcard.Show();
                 label1.Show();
                 midbeforehand= false;
+                togglehide.Hide();
             }
         }
 
@@ -256,6 +263,7 @@ namespace NEA
                 deckcard.Show();
                 label1.Show();
                 midbeforehand = false;
+                togglehide.Hide();
             }
         }
 
@@ -270,6 +278,7 @@ namespace NEA
                 deckcard.Show();
                 label1.Show();
                 midbeforehand = false;
+                togglehide.Hide();
             }
         }
     }

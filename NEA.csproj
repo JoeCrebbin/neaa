@@ -53,25 +53,46 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="game.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="hmp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="hmp.Designer.cs">
+      <DependentUpon>hmp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="launch menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="launch menu.Designer.cs">
+      <DependentUpon>launch menu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="hmp.resx">
+      <DependentUpon>hmp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="launch menu.resx">
+      <DependentUpon>launch menu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -81,209 +102,165 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <None Include="Resources\2_of_clubs.png" />
+    <None Include="Resources\C2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\2_of_diamonds.png" />
+    <None Include="Resources\C3.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\2_of_hearts.png" />
+    <None Include="Resources\C4.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\2_of_spades.png" />
+    <None Include="Resources\C5.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\3_of_clubs.png" />
+    <None Include="Resources\C6.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\3_of_diamonds.png" />
+    <None Include="Resources\C7.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\3_of_hearts.png" />
+    <None Include="Resources\C8.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\3_of_spades.png" />
+    <None Include="Resources\C9.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\4_of_clubs.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\4_of_diamonds.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\4_of_hearts.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\4_of_spades.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\5_of_clubs.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\5_of_diamonds.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\5_of_hearts.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\5_of_spades.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\6_of_clubs.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\6_of_diamonds.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\6_of_hearts.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\6_of_spades.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\7_of_clubs.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\7_of_diamonds.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\7_of_hearts.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\7_of_spades.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\8_of_clubs.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\8_of_diamonds.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\8_of_hearts.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\8_of_spades.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\9_of_clubs.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\9_of_diamonds.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\9_of_hearts.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\9_of_spades.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\10_of_clubs.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\10_of_diamonds.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\10_of_hearts.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\10_of_spades.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ace_of_clubs.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ace_of_diamonds.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ace_of_hearts.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ace_of_spades.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ace_of_spades2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\black_joker.png" />
+    <None Include="Resources\CA.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\card back black.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\jack_of_clubs.png" />
+    <None Include="Resources\CJ.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\jack_of_clubs2.png" />
+    <None Include="Resources\CK.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\jack_of_diamonds.png" />
+    <None Include="Resources\CQ.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\jack_of_diamonds2.png" />
+    <None Include="Resources\CT.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\jack_of_hearts.png" />
+    <None Include="Resources\D2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\jack_of_hearts2.png" />
+    <None Include="Resources\D3.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\jack_of_spades.png" />
+    <None Include="Resources\D4.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\jack_of_spades2.png" />
+    <None Include="Resources\D5.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\king_of_clubs.png" />
+    <None Include="Resources\D6.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\king_of_clubs2.png" />
+    <None Include="Resources\D7.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\king_of_diamonds.png" />
+    <None Include="Resources\D8.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\king_of_diamonds2.png" />
+    <None Include="Resources\D9.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\king_of_hearts.png" />
+    <None Include="Resources\DA.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\king_of_hearts2.png" />
+    <None Include="Resources\DJ.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\king_of_spades.png" />
+    <None Include="Resources\DK.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\king_of_spades2.png" />
+    <None Include="Resources\DQ.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\queen_of_clubs.png" />
+    <None Include="Resources\DT.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\queen_of_clubs2.png" />
+    <None Include="Resources\H2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\queen_of_diamonds.png" />
+    <None Include="Resources\H3.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\queen_of_diamonds2.png" />
+    <None Include="Resources\H4.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\queen_of_hearts.png" />
+    <None Include="Resources\H5.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\queen_of_hearts2.png" />
+    <None Include="Resources\H6.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\queen_of_spades.png" />
+    <None Include="Resources\H7.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\queen_of_spades2.png" />
+    <None Include="Resources\H8.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\red_joker.png" />
+    <None Include="Resources\H9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HJ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HT.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\S2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\S3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\S4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\S5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\S6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\S7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\S8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\S9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SJ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ST.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

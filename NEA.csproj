@@ -104,163 +104,163 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="Resources\C2.png" />
+    <None Include="bin\Resources\C2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\C3.png" />
+    <None Include="bin\Resources\C3.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\C4.png" />
+    <None Include="bin\Resources\C4.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\C5.png" />
+    <None Include="bin\Resources\C5.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\C6.png" />
+    <None Include="bin\Resources\C6.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\C7.png" />
+    <None Include="bin\Resources\C7.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\C8.png" />
+    <None Include="bin\Resources\C8.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\C9.png" />
+    <None Include="bin\Resources\C9.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\CA.png" />
+    <None Include="bin\Resources\CA.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\card back black.png" />
+    <None Include="bin\Resources\card back black.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\CJ.png" />
+    <None Include="bin\Resources\CJ.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\CK.png" />
+    <None Include="bin\Resources\CK.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\CQ.png" />
+    <None Include="bin\Resources\CQ.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\CT.png" />
+    <None Include="bin\Resources\CT.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\D2.png" />
+    <None Include="bin\Resources\D2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\D3.png" />
+    <None Include="bin\Resources\D3.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\D4.png" />
+    <None Include="bin\Resources\D4.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\D5.png" />
+    <None Include="bin\Resources\D5.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\D6.png" />
+    <None Include="bin\Resources\D6.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\D7.png" />
+    <None Include="bin\Resources\D7.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\D8.png" />
+    <None Include="bin\Resources\D8.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\D9.png" />
+    <None Include="bin\Resources\D9.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\DA.png" />
+    <None Include="bin\Resources\DA.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\DJ.png" />
+    <None Include="bin\Resources\DJ.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\DK.png" />
+    <None Include="bin\Resources\DK.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\DQ.png" />
+    <None Include="bin\Resources\DQ.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\DT.png" />
+    <None Include="bin\Resources\DT.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\H2.png" />
+    <None Include="bin\Resources\H2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\H3.png" />
+    <None Include="bin\Resources\H3.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\H4.png" />
+    <None Include="bin\Resources\H4.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\H5.png" />
+    <None Include="bin\Resources\H5.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\H6.png" />
+    <None Include="bin\Resources\H6.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\H7.png" />
+    <None Include="bin\Resources\H7.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\H8.png" />
+    <None Include="bin\Resources\H8.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\H9.png" />
+    <None Include="bin\Resources\H9.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\HA.png" />
+    <None Include="bin\Resources\HA.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\HJ.png" />
+    <None Include="bin\Resources\HJ.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\HK.png" />
+    <None Include="bin\Resources\HK.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\HQ.png" />
+    <None Include="bin\Resources\HQ.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\HT.png" />
+    <None Include="bin\Resources\HT.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\S2.png" />
+    <None Include="bin\Resources\S2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\S3.png" />
+    <None Include="bin\Resources\S3.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\S4.png" />
+    <None Include="bin\Resources\S4.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\S5.png" />
+    <None Include="bin\Resources\S5.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\S6.png" />
+    <None Include="bin\Resources\S6.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\S7.png" />
+    <None Include="bin\Resources\S7.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\S8.png" />
+    <None Include="bin\Resources\S8.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\S9.png" />
+    <None Include="bin\Resources\S9.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\SA.png" />
+    <None Include="bin\Resources\SA.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\SJ.png" />
+    <None Include="bin\Resources\SJ.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\SK.png" />
+    <None Include="bin\Resources\SK.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\SQ.png" />
+    <None Include="bin\Resources\SQ.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ST.png" />
+    <None Include="bin\Resources\ST.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

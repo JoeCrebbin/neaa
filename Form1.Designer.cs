@@ -202,12 +202,13 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Lucida Fax", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(711, 440);
+            this.button2.Location = new System.Drawing.Point(656, 440);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(117, 45);
+            this.button2.Size = new System.Drawing.Size(172, 45);
             this.button2.TabIndex = 14;
             this.button2.Text = "Knock";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label5
             // 

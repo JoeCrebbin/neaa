@@ -1,8 +1,10 @@
-﻿using System;
+﻿using NEA.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +16,8 @@ namespace NEA
     public partial class Form1 : Form
 
     {
+        public static string cardDirectory = Path.Combine(Environment.CurrentDirectory, @"Resources");
+
         public static int turnnum = 0;
         public static int playerwho = 1;
 
@@ -28,41 +32,41 @@ namespace NEA
             switch (playerwho)
             {
                 case 1:
-                    p1card1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p1hand[0] + ".png");
-                    p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p1hand[1] + ".png");
-                    p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p1hand[2] + ".png");
+                    p1card1.Image = Image.FromFile($"{game.p1hand[0]}.png");
+                    p1card2.Image = Image.FromFile($"{game.p1hand[1]}.png");
+                    p1card3.Image = Image.FromFile($"{game.p1hand[2]}.png");
                     showMidCards();
                     System.Diagnostics.Debug.WriteLine("it works!");
                     break;
                 case 2:
-                    p1card1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p2hand[0] + ".png");
-                    p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p2hand[1] + ".png");
-                    p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p2hand[2] + ".png");
+                    p1card1.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\{game.p2hand[0]}.png");
+                    p1card2.Image = Image.FromFile($"{game.p2hand[1]}.png");
+                    p1card1.Image = Image.FromFile($"{game.p2hand[3]}.png"); 
                     showMidCards();
 
                     break;
                 case 3:
-                    p1card1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p3hand[0] + ".png");
-                    p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p3hand[1] + ".png");
-                    p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p3hand[2] + ".png");
+                    p1card1.ImageLocation = (Path.Combine(Environment.CurrentDirectory, @"Resources\", game.p3hand[0], ".png"));
+                    p1card2.ImageLocation = (Path.Combine(Environment.CurrentDirectory, @"Resources\", game.p3hand[1], ".png"));
+                    p1card3.ImageLocation = (Path.Combine(Environment.CurrentDirectory, @"Resources\", game.p3hand[2], ".png"));
                     showMidCards();
                     break;
                 case 4:
-                    p1card1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p4hand[0] + ".png");
-                    p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p4hand[1] + ".png");
-                    p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p4hand[2] + ".png");
+                    p1card1.ImageLocation = (Path.Combine(Environment.CurrentDirectory, @"Resources\", game.p4hand[0], ".png"));
+                    p1card2.ImageLocation = (Path.Combine(Environment.CurrentDirectory, @"Resources\", game.p4hand[1], ".png"));
+                    p1card3.ImageLocation = (Path.Combine(Environment.CurrentDirectory, @"Resources\", game.p4hand[2], ".png"));
                     showMidCards();
                     break;
                 case 5:
-                    p1card1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p5hand[0] + ".png");
-                    p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p5hand[1] + ".png");
-                    p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p5hand[2] + ".png");
+                    p1card1.ImageLocation = (Path.Combine(Environment.CurrentDirectory, @"Resources\", game.p5hand[0], ".png"));
+                    p1card2.ImageLocation = (Path.Combine(Environment.CurrentDirectory, @"Resources\", game.p5hand[1], ".png"));
+                    p1card3.ImageLocation = (Path.Combine(Environment.CurrentDirectory, @"Resources\", game.p5hand[2], ".png"));
                     showMidCards();
                     break;
                 case 6:
-                    p1card1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p6hand[0] + ".png");
-                    p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p6hand[1] + ".png");
-                    p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p6hand[2] + ".png");
+                    p1card1.ImageLocation = (Path.Combine(Environment.CurrentDirectory, @"Resources\", game.p6hand[0], ".png"));
+                    p1card2.ImageLocation = (Path.Combine(Environment.CurrentDirectory, @"Resources\", game.p6hand[1], ".png"));
+                    p1card3.ImageLocation = (Path.Combine(Environment.CurrentDirectory, @"Resources\", game.p6hand[2], ".png"));
                     showMidCards();
                     break;
             }
@@ -292,6 +296,11 @@ namespace NEA
                 label5.Text = $"Player {playerwho}'s turn";
                 togglehide.Hide();
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

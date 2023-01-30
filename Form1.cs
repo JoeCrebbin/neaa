@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace NEA
 
     {
         public static int turnnum = 0;
-        public static int playerwho = 1;
+        public static int playerwho = 0;
 
         public static bool cardsHidden;
 
@@ -25,47 +26,13 @@ namespace NEA
         {
             Form1 formcont = new Form1();
             cardsHidden= false;
-            switch (playerwho)
-            {
-                case 1:
-                    p1card1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p1hand[0] + ".png");
-                    p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p1hand[1] + ".png");
-                    p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p1hand[2] + ".png");
-                    showMidCards();
-                    System.Diagnostics.Debug.WriteLine("it works!");
-                    break;
-                case 2:
-                    p1card1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p2hand[0] + ".png");
-                    p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p2hand[1] + ".png");
-                    p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p2hand[2] + ".png");
-                    showMidCards();
 
-                    break;
-                case 3:
-                    p1card1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p3hand[0] + ".png");
-                    p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p3hand[1] + ".png");
-                    p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p3hand[2] + ".png");
-                    showMidCards();
-                    break;
-                case 4:
-                    p1card1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p4hand[0] + ".png");
-                    p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p4hand[1] + ".png");
-                    p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p4hand[2] + ".png");
-                    showMidCards();
-                    break;
-                case 5:
-                    p1card1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p5hand[0] + ".png");
-                    p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p5hand[1] + ".png");
-                    p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p5hand[2] + ".png");
-                    showMidCards();
-                    break;
-                case 6:
-                    p1card1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p6hand[0] + ".png");
-                    p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p6hand[1] + ".png");
-                    p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p6hand[2] + ".png");
-                    showMidCards();
-                    break;
-            }
+            p1card1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.hands[playerwho, 0] + ".png");
+            p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.hands[playerwho, 1] + ".png");
+            p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.hands[playerwho, 2] + ".png");
+            System.Diagnostics.Debug.WriteLine($"playerwho is {playerwho}");
+            System.Diagnostics.Debug.WriteLine($"current hand is {game.hands[playerwho, 0]} and {game.hands[playerwho, 1]} and {game.hands[playerwho, 2]}");
+            showMidCards();
 
         }
 
@@ -99,11 +66,11 @@ namespace NEA
                 case 2:
                     switch (playerwho)
                     {
-                        case 1:
-                            playerwho= 2; 
+                        case 0:
+                            playerwho= 1; 
                             break;
-                        case 2:
-                            playerwho= 1;
+                        case 1:
+                            playerwho= 0;
                             break;
                     }
                 break;
@@ -114,8 +81,8 @@ namespace NEA
                         default:
                             playerwho++;
                             break;
-                        case 3:
-                            playerwho = 1;
+                        case 2:
+                            playerwho = 0;
                             break;
                     }
                 break;
@@ -126,8 +93,8 @@ namespace NEA
                         default:
                             playerwho++;
                             break;
-                        case 4:
-                            playerwho = 1;
+                        case 3:
+                            playerwho = 0;
                             break;
                     }
                 break;
@@ -138,8 +105,8 @@ namespace NEA
                         default:
                             playerwho++;
                             break;
-                        case 5:
-                            playerwho = 1;
+                        case 4:
+                            playerwho = 0;
                         break;
                     }
                 break;
@@ -149,8 +116,8 @@ namespace NEA
                         default:
                             playerwho++;
                             break;
-                        case 6:
-                            playerwho = 1;
+                        case 5:
+                            playerwho = 0;
                             break;
                     }
                     break;
@@ -168,24 +135,10 @@ namespace NEA
         
         public void pictureBox1_Click(object sender, EventArgs e)
         {
-
-            if (turnnum == 0)
-            {
-                showMidCards();
-                turnnum++;
-                p1card1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p1hand[0] + ".png");
-                p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p1hand[1] + ".png");
-                p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.p1hand[2] + ".png");
-                label1.Text = "Show Hand";
-
-            }
-            else
-            {
-                displaycards();
-            }
+            displaycards();
             nextTurn();
             label5.Show();
-            label5.Text = $"Player {playerwho}'s turn";
+            label5.Text = $"Player {playerwho + 1}'s turn";
             deckcard.Hide();
             System.Diagnostics.Debug.WriteLine("");
         }
@@ -210,7 +163,7 @@ namespace NEA
             nextTurn();
             togglehide.Hide();
             button1.Hide();
-            label5.Text = $"Player {playerwho}'s turn";
+            label5.Text = $"Player {playerwho + 1}'s turn";
         }
 
         private bool midbeforehand = false;
@@ -255,7 +208,7 @@ namespace NEA
                 label1.Show();
                 button1.Hide();
                 midbeforehand = false;
-                label5.Text = $"Player {playerwho}'s turn";
+                label5.Text = $"Player {playerwho + 1}'s turn";
                 togglehide.Hide();
             }
         }
@@ -272,7 +225,7 @@ namespace NEA
                 button1.Hide();
                 label1.Show();
                 midbeforehand = false;
-                label5.Text = $"Player {playerwho}'s turn";
+                label5.Text = $"Player {playerwho + 1}'s turn";
                 togglehide.Hide();
             }
         }
@@ -289,7 +242,7 @@ namespace NEA
                 label1.Show();
                 button1.Hide();
                 midbeforehand = false;
-                label5.Text = $"Player {playerwho}'s turn";
+                label5.Text = $"Player {playerwho + 1}'s turn";
                 togglehide.Hide();
             }
         }

@@ -27,9 +27,9 @@ namespace NEA
             Form1 formcont = new Form1();
             cardsHidden= false;
 
-            p1card1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.hands[playerwho, 0] + ".png");
-            p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.hands[playerwho, 1] + ".png");
-            p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.hands[playerwho, 2] + ".png");
+            p1card1.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\{game.hands[playerwho, 0]}.png");
+            p1card2.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\{game.hands[playerwho, 1]}.png");
+            p1card3.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\{game.hands[playerwho, 2]}.png"); 
             System.Diagnostics.Debug.WriteLine($"playerwho is {playerwho}");
             System.Diagnostics.Debug.WriteLine($"current hand is {game.hands[playerwho, 0]} and {game.hands[playerwho, 1]} and {game.hands[playerwho, 2]}");
             showMidCards();
@@ -53,9 +53,9 @@ namespace NEA
 
         public void showMidCards()
         {
-            midcard1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.midhand[0] + ".png");
-            midcard2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.midhand[1] + ".png");
-            midcard3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\" + game.midhand[2] + ".png");
+            midcard1.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\{game.midhand[0]}.png");
+            midcard2.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\{game.midhand[1]}.png");
+            midcard3.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\{game.midhand[2]}.png");
         }
 
         public static void calcplayerwho()
@@ -127,9 +127,9 @@ namespace NEA
         public void hidecards()
         {
             cardsHidden= true;
-            p1card1.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\card back black.png");
-            p1card2.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\card back black.png");
-            p1card3.ImageLocation = ("C:\\Users\\josep\\source\\repos\\neaa\\Resources\\card back black.png");
+            p1card1.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\card back black.png");
+            p1card2.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\card back black.png");
+            p1card3.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\card back black.png");
         }
 
         

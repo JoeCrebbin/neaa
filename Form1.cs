@@ -19,9 +19,15 @@ namespace NEA
         public static string cardDirectory = Path.Combine(Environment.CurrentDirectory, @"Resources");
 
         public static int turnnum = 0;
+<<<<<<< Updated upstream
         public static int playerwho = 1;
 
+=======
+        public static int playerwho = 0;
+        public static bool knocked = false;
+>>>>>>> Stashed changes
         public static bool cardsHidden;
+        public static int whoknocked;
 
         public static Random rnd = new Random();
 
@@ -85,6 +91,10 @@ namespace NEA
             button1.Show();
             label4.Show();
             button1.Show();
+            if (knocked != true)
+            {
+                knockButton.Show();
+            }
             label1.Hide();
         }
 
@@ -96,8 +106,8 @@ namespace NEA
         }
 
         public static void calcplayerwho()
-            {
-                Form1 former = new Form1();
+        {
+            Form1 former = new Form1();
             switch (hmp.selectedp)
                 {
                 case 2:
@@ -159,7 +169,11 @@ namespace NEA
                     }
                     break;
                 }
+            if (knocked == true && whoknocked == playerwho)
+            {
+                game.endgame();
             }
+        }
 
         public void hidecards()
         {
@@ -192,11 +206,11 @@ namespace NEA
             label5.Text = $"Player {playerwho}'s turn";
             deckcard.Hide();
             System.Diagnostics.Debug.WriteLine("");
+            calcplayerwho();
         }
         public void togglehide_Click(object sender, EventArgs e)
         {
             hidecards();
-            calcplayerwho();
             button1.Hide();
             deckcard.Show();
             label1.Show();
@@ -209,10 +223,7 @@ namespace NEA
             deckcard.Show();
             displaycards();
             button1.Hide();
-            hidecards();
-            calcplayerwho();
-            nextTurn();
-            togglehide.Hide();
+            togglehide.Show();
             button1.Hide();
             label5.Text = $"Player {playerwho}'s turn";
         }
@@ -253,11 +264,10 @@ namespace NEA
             {
                 game.swapCard2(0);
                 displaycards();
-                hidecards();
-                calcplayerwho();
                 deckcard.Show();
                 label1.Show();
                 button1.Hide();
+                hidecards();
                 midbeforehand = false;
                 label5.Text = $"Player {playerwho}'s turn";
                 togglehide.Hide();
@@ -270,10 +280,9 @@ namespace NEA
             {
                 game.swapCard2(1);
                 displaycards();
-                hidecards();
-                calcplayerwho();
                 deckcard.Show();
                 button1.Hide();
+                hidecards();
                 label1.Show();
                 midbeforehand = false;
                 label5.Text = $"Player {playerwho}'s turn";
@@ -287,10 +296,9 @@ namespace NEA
             {
                 game.swapCard2(2);
                 displaycards();
-                hidecards();
-                calcplayerwho();
                 deckcard.Show();
                 label1.Show();
+                hidecards();
                 button1.Hide();
                 midbeforehand = false;
                 label5.Text = $"Player {playerwho}'s turn";
@@ -298,9 +306,16 @@ namespace NEA
             }
         }
 
+<<<<<<< Updated upstream
         private void button2_Click(object sender, EventArgs e)
         {
 
+=======
+        private void knockButton_Click(object sender, EventArgs e)
+        {
+            knocked = true;
+            knockButton.Hide();
+>>>>>>> Stashed changes
         }
     }
 }

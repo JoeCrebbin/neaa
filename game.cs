@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,8 +16,8 @@ namespace NEA
         public static string[] p5hand = new string[3];
         public static string[] p6hand = new string[3];
         public static string[] midhand = new string[3];
-
-
+        public static int[,] gamescore = new int[6, 1];
+        public static int playerCount;
         public static int sharedindex; //this is here because i need a parameter from one swapcard to the other
         public static string tempcard = string.Empty;
         public static Random rnd1 = new Random();
@@ -25,6 +26,7 @@ namespace NEA
         {
             Form1 formcont = new Form1();
             Deck dealer = new Deck();
+            playerCount= pCount;
             dealer.shuffleDeck();
             System.Diagnostics.Debug.WriteLine("starting game with " + (pCount) + " players");
             for (int i = 0; i < 3; i++)
@@ -165,6 +167,7 @@ namespace NEA
         }
         public static void swapCard2(int handIndex)
         {
+<<<<<<< Updated upstream
             switch (playerwho)
             {
                 case 1:
@@ -209,4 +212,33 @@ namespace NEA
 
 
     }
+=======
+            midhand[sharedindex] = hands[playerwho, handIndex];
+            hands[playerwho, handIndex] = tempcard;
+        }
+        public static void knock()
+        {
+            knocked = true;
+            whoknocked = playerwho;
+        }
+
+        public static void endgame()
+        {
+            //checking for a flush
+                for (int j = 0; j != playerCount; j++)
+                {
+                    if ((hands[j, 0][0] == hands[j, 1][0]) && (hands[j, 1][0] == hands[j, 2][0]))
+                    {
+                        gamescore[j, 0] = 1;
+                    }
+                    else
+                    {
+                        gamescore[j, 0] = 0;
+                    }
+                    System.Diagnostics.Debug.WriteLine($"Player {j+1}'s hand is {gamescore[j,0]}");
+                }
+        }
+    }
+    
+>>>>>>> Stashed changes
 }

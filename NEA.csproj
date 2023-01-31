@@ -102,7 +102,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="bin\Debug\Resources\deal.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="bin\Resources\C2.png" />
   </ItemGroup>
@@ -261,6 +263,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Resources\ST.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Resources\nextplayer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Resources\revealhand.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

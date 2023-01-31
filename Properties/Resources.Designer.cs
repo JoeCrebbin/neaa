@@ -293,6 +293,16 @@ namespace NEA.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap deal {
+            get {
+                object obj = ResourceManager.GetObject("deal", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap DJ {
             get {
                 object obj = ResourceManager.GetObject("DJ", resourceCulture);
@@ -456,6 +466,26 @@ namespace NEA.Properties {
         internal static System.Drawing.Bitmap HT {
             get {
                 object obj = ResourceManager.GetObject("HT", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap nextplayer {
+            get {
+                object obj = ResourceManager.GetObject("nextplayer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap revealhand {
+            get {
+                object obj = ResourceManager.GetObject("revealhand", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

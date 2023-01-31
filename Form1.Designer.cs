@@ -41,8 +41,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.knockButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.deckcard)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.p1card2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.p1card1)).BeginInit();
@@ -54,7 +54,7 @@
             // 
             // deckcard
             // 
-            this.deckcard.Image = global::NEA.Properties.Resources.card_back_black;
+            this.deckcard.Image = global::NEA.Properties.Resources.deal;
             this.deckcard.InitialImage = global::NEA.Properties.Resources.card_back_black;
             this.deckcard.Location = new System.Drawing.Point(12, 309);
             this.deckcard.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -199,6 +199,7 @@
             this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+<<<<<<< Updated upstream
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Lucida Fax", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -210,6 +211,8 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+=======
+>>>>>>> Stashed changes
             // label5
             // 
             this.label5.AutoSize = true;
@@ -221,13 +224,25 @@
             this.label5.Text = "Player: ";
             this.label5.Visible = false;
             // 
+            // knockButton
+            // 
+            this.knockButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.knockButton.Location = new System.Drawing.Point(671, 214);
+            this.knockButton.Name = "knockButton";
+            this.knockButton.Size = new System.Drawing.Size(89, 63);
+            this.knockButton.TabIndex = 16;
+            this.knockButton.Text = "Knock";
+            this.knockButton.UseVisualStyleBackColor = true;
+            this.knockButton.Visible = false;
+            this.knockButton.Click += new System.EventHandler(this.knockButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(840, 497);
+            this.Controls.Add(this.knockButton);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -271,8 +286,8 @@
         public System.Windows.Forms.PictureBox p1card2;
         public System.Windows.Forms.PictureBox p1card3;
         public System.Windows.Forms.PictureBox p1card1;
-        private System.Windows.Forms.Button button2;
         public System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button knockButton;
     }
 }
 

@@ -17,9 +17,10 @@ namespace NEA
     {
         public static int turnnum = 0;
         public static int playerwho = 0;
-
+        public static bool knocked = false;
+        public static int whoknocked;
         public static bool cardsHidden;
-
+        public static bool hasplayed = false;
         public static Random rnd = new Random();
 
         public void displaycards()
@@ -48,6 +49,11 @@ namespace NEA
             button1.Show();
             label4.Show();
             button1.Show();
+            midbeforehand = false;
+            if (knocked == false)
+            {
+                knockbutton.Show();
+            }
             label1.Hide();
         }
 
@@ -122,7 +128,19 @@ namespace NEA
                     }
                     break;
                 }
+
+                if (whoknocked == playerwho && knocked == true)
+                {
+                    game.endgame();
+                    var podium = new podium();
+                    podium.Show();
             }
+        }
+
+        public void prehiddencards()
+        {
+
+        }
 
         public void hidecards()
         {
@@ -147,6 +165,8 @@ namespace NEA
             hidecards();
             calcplayerwho();
             button1.Hide();
+            knockbutton.Hide();
+            hasplayed= false;
             deckcard.Show();
             label1.Show();
             togglehide.Hide();
@@ -154,16 +174,17 @@ namespace NEA
 
         private void button1_Click(object sender, EventArgs e)
         {
-            game.swapHand();
-            deckcard.Show();
-            displaycards();
-            button1.Hide();
-            hidecards();
-            calcplayerwho();
-            nextTurn();
-            togglehide.Hide();
-            button1.Hide();
-            label5.Text = $"Player {playerwho + 1}'s turn";
+            if (hasplayed == false)
+            {
+                game.swapHand();
+                displaycards();
+                showMidCards();
+                button1.Hide();
+                nextTurn();
+                button1.Hide();
+                hasplayed = true;
+                label5.Text = $"Player {playerwho + 1}'s turn";
+            }
         }
 
         private bool midbeforehand = false;
@@ -198,53 +219,56 @@ namespace NEA
 
         private void p1card1_Click(object sender, EventArgs e)
         {
-            if (midbeforehand == true && cardsHidden == false)
+            if (midbeforehand == true && cardsHidden == false && hasplayed == false)
             {
                 game.swapCard2(0);
-                displaycards();
-                hidecards();
-                calcplayerwho();
-                deckcard.Show();
-                label1.Show();
                 button1.Hide();
+                displaycards();
+                showMidCards();
                 midbeforehand = false;
                 label5.Text = $"Player {playerwho + 1}'s turn";
-                togglehide.Hide();
+                hasplayed = true;
             }
         }
 
         private void p1card2_Click(object sender, EventArgs e)
         {
-            if (midbeforehand == true && cardsHidden == false)
+            if (midbeforehand == true && cardsHidden == false && hasplayed == false)
             {
                 game.swapCard2(1);
-                displaycards();
-                hidecards();
-                calcplayerwho();
-                deckcard.Show();
                 button1.Hide();
-                label1.Show();
+                displaycards();
+                showMidCards();
                 midbeforehand = false;
                 label5.Text = $"Player {playerwho + 1}'s turn";
-                togglehide.Hide();
+                hasplayed = true;
             }
         }
 
         private void p1card3_Click(object sender, EventArgs e)
         {
-            if (midbeforehand == true && cardsHidden == false)
+            if (midbeforehand == true && cardsHidden == false && hasplayed == false)
             {
                 game.swapCard2(2);
-                displaycards();
-                hidecards();
-                calcplayerwho();
-                deckcard.Show();
-                label1.Show();
                 button1.Hide();
+                displaycards();
+                showMidCards();
                 midbeforehand = false;
                 label5.Text = $"Player {playerwho + 1}'s turn";
-                togglehide.Hide();
+                hasplayed = true;
             }
+        }
+
+        private void knockbutton_Click(object sender, EventArgs e)
+        {
+            knocked = true;
+            whoknocked = playerwho;
+            knockbutton.Hide();
+        }
+
+        public void showAllHands()
+        {
+
         }
     }
 }

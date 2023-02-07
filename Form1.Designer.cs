@@ -68,12 +68,12 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(24, 269);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(50, 248);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(88, 38);
+            this.label1.Size = new System.Drawing.Size(67, 58);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Deal";
+            this.label1.Text = "\r\nDeal";
             // 
             // p1card2
             // 

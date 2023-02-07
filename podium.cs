@@ -23,9 +23,9 @@ namespace NEA
 
         public void afterGameShowHands()
         {
-            card1.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\{game.hands[0, 0]}.png");
-            card2.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\{game.hands[0, 1]}.png");
-            card3.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\{game.hands[0, 2]}.png");
+            card1.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\{game.hands[game.winner, 0]}.png");
+            card2.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\{game.hands[game.winner, 1]}.png");
+            card3.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\{game.hands[game.winner, 2]}.png");
             DisplayWinner();
         }
 

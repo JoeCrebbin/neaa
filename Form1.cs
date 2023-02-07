@@ -48,6 +48,7 @@ namespace NEA
             label3.Show();
             button1.Show();
             label4.Show();
+            label1.Text = "Show Next \n Hand:";
             button1.Show();
             midbeforehand = false;
             if (knocked == false)

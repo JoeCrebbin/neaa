@@ -64,6 +64,8 @@ namespace NEA
 
         public static void endgame()
         {
+            int[] highCard = new int[6];
+            //big for loop which handles score
             for (int j = 0; j!=playercount; j++)
             {
                 flushed = false;
@@ -113,6 +115,9 @@ namespace NEA
                     System.Diagnostics.Debug.WriteLine("That's a motherfucking run");
                     ran = true;
                 }
+
+                highCard[j] = OrderedCardNumbers[3];
+                
                 
                 //test for running flush
 
@@ -134,10 +139,13 @@ namespace NEA
                     score[j] = score[j] + 2;
                     System.Diagnostics.Debug.WriteLine($"Pairin'");
                 }
+
+                //test for highest card
+                
             }
 
             int winningscore = 0;
-
+            int[] priorscore = new int[6];
             foreach (int i in score)
             {
                 if (score[i+1] > score[i])

@@ -31,7 +31,8 @@ namespace NEA
 
         public void DisplayWinner()
         {
-            wtext.Text = $"Player {game.winner + 1}";
+            wtext.Text = $"Player {game.winner+1}";
+            plabel.Text = ($"Player {game.winner+1}'s hand");
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -43,6 +44,7 @@ namespace NEA
             card1.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\{game.hands[temp, 0]}.png");
             card2.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\{game.hands[temp, 1]}.png");
             card3.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\{game.hands[temp, 2]}.png");
+            plabel.Text = ($"Player {temp+1}'s hand");
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -55,6 +57,7 @@ namespace NEA
             card1.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\{game.hands[temp, 0]}.png");
             card2.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\{game.hands[temp, 1]}.png");
             card3.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\{game.hands[temp, 2]}.png");
+            plabel.Text = ($"Player {temp+ 1}'s hand");
         }
     }
 }

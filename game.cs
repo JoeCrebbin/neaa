@@ -14,6 +14,8 @@ namespace NEA
         public static int[] score = new int[6];
         public static int playercount;
         public static bool flushed;
+        public static bool ace;
+        public static int[] highCard = new int[6];
         public static int winner = 0;
         public static bool ran;
         public static int sharedindex; //this is here because i need a parameter from one swapcard to the other
@@ -64,7 +66,6 @@ namespace NEA
 
         public static void endgame()
         {
-            int[] highCard = new int[6];
             //big for loop which handles score
             for (int j = 0; j!=playercount; j++)
             {
@@ -73,8 +74,10 @@ namespace NEA
                 //testing for flush
                 if ((hands[j, 0][0] == hands[j, 1][0]) & (hands[j, 1][0] == hands[j, 2][0]))
                 {
-                    score[j]++;
-                    flushed = true;                
+                    score[j] = score[j] + 100;
+                    flushed = true;
+                    System.Diagnostics.Debug.WriteLine($"FLUSH: Player {j + 1}'s score is {score[j]}");
+
                 }
 
                 //sanitises notation to ints and tests for run
@@ -82,10 +85,12 @@ namespace NEA
                 List<int> OrderedCardNumbers = new List<int> { 1, 1, 1};
                 for (int i = 0; i < 3; i++)
                 {
+                    ace = false;
                     switch (CardNumbers[i])
                     {
                         case 'A':
                             OrderedCardNumbers[i] = 1;
+                            ace = true;
                             break;
                         case 'J':
                             OrderedCardNumbers[i] = 11;
@@ -105,52 +110,55 @@ namespace NEA
                 OrderedCardNumbers.Sort();
                 if ((OrderedCardNumbers[0]+1) == OrderedCardNumbers[1] && ((OrderedCardNumbers[1] + 1) == OrderedCardNumbers[2]))
                 {
-                    score[j] = score[j] + 3;
-                    System.Diagnostics.Debug.WriteLine("That's a motherfucking run");
+                    score[j] = score[j] + 300;
+                    System.Diagnostics.Debug.WriteLine($"RUN: Player {j}'s score is {score[j]}");
                     ran = true;
                 }
                 else if (OrderedCardNumbers.Contains(1) && OrderedCardNumbers.Contains(12) && OrderedCardNumbers.Contains(13))
                 {
-                    score[j] = score[j] + 3;
-                    System.Diagnostics.Debug.WriteLine("That's a motherfucking run");
+                    score[j] = score[j] + 300;
+                    System.Diagnostics.Debug.WriteLine($"RUN VIA KING QUEEN ACE: Player {j+1}'s score is {score[j]}");
                     ran = true;
                 }
 
-                highCard[j] = OrderedCardNumbers[3];
+                highCard[j] = OrderedCardNumbers[2];
+                if (ace)
+                {
+                    highCard[j] = 14;
+                }
                 
                 
                 //test for running flush
 
                 if (ran && flushed)
                 {
-                    score[j] = score[j] + 9;
+                    score[j] = score[j] + 900;
                 }
 
                 //test for prial
 
                 if ((hands[j, 0][1] == hands[j, 1][1]) && (hands[j, 1][1] == hands[j, 2][1]))
                 {
-                    score[j] = score[j] + 10;
-                    System.Diagnostics.Debug.WriteLine($"prilin'");
+                    score[j] = score[j] + 1000;
+                    System.Diagnostics.Debug.WriteLine($"PRILEL: Player {j+1}'s score is {score[j]}");
+
                 }
                 //test for pair
-                else if ((hands[j, 0][1] == hands[j, 1][1]) || (hands[j, 1][1] == hands[j, 2][1]))
+                else if ((hands[j, 0][1] == hands[j, 1][1]) || (hands[j, 1][1] == hands[j, 2][1]) || (hands[j, 0][1] == hands[j, 2][1]))
                 {
-                    score[j] = score[j] + 2;
-                    System.Diagnostics.Debug.WriteLine($"Pairin'");
+                    score[j] = score[j] + 200;
+                    System.Diagnostics.Debug.WriteLine($"PAIR: Player {j+1}'s score is {score[j]}");
                 }
-
-                //test for highest card
-                
+                //add highest card
+                score[j] = score[j] + highCard[j];
             }
 
             int winningscore = 0;
-            int[] priorscore = new int[6];
-            foreach (int i in score)
+            for (int i = 0; i < playercount; i++)
             {
-                if (score[i+1] > score[i])
+                if (score[i + 1] > score[i])
                 {
-                    winningscore = score[i+1];
+                    winningscore = score[i + 1];
                 }
             }
             winner = Array.IndexOf(score, winningscore);

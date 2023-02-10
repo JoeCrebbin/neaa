@@ -35,6 +35,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.card2 = new System.Windows.Forms.PictureBox();
             this.card3 = new System.Windows.Forms.PictureBox();
+            this.plabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.card1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.card2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.card3)).BeginInit();
@@ -113,11 +114,21 @@
             this.card3.TabIndex = 7;
             this.card3.TabStop = false;
             // 
+            // plabel
+            // 
+            this.plabel.AutoSize = true;
+            this.plabel.Location = new System.Drawing.Point(254, 306);
+            this.plabel.Name = "plabel";
+            this.plabel.Size = new System.Drawing.Size(103, 16);
+            this.plabel.TabIndex = 8;
+            this.plabel.Text = "Player X\'s Hand";
+            // 
             // podium
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.plabel);
             this.Controls.Add(this.card3);
             this.Controls.Add(this.card2);
             this.Controls.Add(this.button2);
@@ -144,5 +155,6 @@
         private System.Windows.Forms.Button button2;
         public System.Windows.Forms.PictureBox card2;
         public System.Windows.Forms.PictureBox card3;
+        private System.Windows.Forms.Label plabel;
     }
 }

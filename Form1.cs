@@ -132,7 +132,7 @@ namespace NEA
 
                 if (whoknocked == playerwho && knocked == true)
                 {
-                    game.endgame();
+                    game.ScoreHand(game.hands, game.playerwho);
                     var podium = new podium();
                     podium.Show();
             }

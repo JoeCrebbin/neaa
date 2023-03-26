@@ -51,6 +51,39 @@ namespace NEA
             }
             //System.Diagnostics.Debug.WriteLine($"Mid hand should be {midhand[0]}, {midhand[1]} and {midhand[2]}");
         }
+        public static int GetCardValue(string card)
+        {
+            char value = card[1];
+
+            if (value == 'A')
+            {
+                return 1;
+            }
+            else if (value >= '2' && value <= '9')
+            {
+                return value - '0';
+            }
+            else if (value == 'T')
+            {
+                return 10;
+            }
+            else if (value == 'J')
+            {
+                return 11;
+            }
+            else if (value == 'Q')
+            {
+                return 12;
+            }
+            else if (value == 'K')
+            {
+                return 13;
+            }
+            else
+            {
+                throw new ArgumentException($"Invalid card value '{value}'.");
+            }
+        }
 
         public static void swapCard1(int midIndex)
         {
@@ -64,105 +97,73 @@ namespace NEA
             hands[playerwho, handIndex] = tempcard;
         }
 
-        public static void endgame()
+        public static int ScoreHand(string[,] hands, int playerIndex)
         {
-            //big for loop which handles score
-            for (int j = 0; j!=playercount; j++)
+            // Sort the player's hand in descending order of card value
+            string[] hand = new string[3] { hands[playerIndex, 0], hands[playerIndex, 1], hands[playerIndex, 2] };
+            Array.Sort(hand, (x, y) => GetCardValue(y).CompareTo(GetCardValue(x)));
+
+            // Check for special hands
+            if (hand[0][1] == hand[1][1] && hand[1][1] == hand[2][1])
             {
-                flushed = false;
-                ran = false;
-                //testing for flush
-                if ((hands[j, 0][0] == hands[j, 1][0]) & (hands[j, 1][0] == hands[j, 2][0]))
+                // Three of a kind
+                if (hand[0][1] == 'A')
                 {
-                    score[j] = score[j] + 100;
-                    flushed = true;
-                    System.Diagnostics.Debug.WriteLine($"FLUSH: Player {j + 1}'s score is {score[j]}");
-
+                    return 31;
                 }
-
-                //sanitises notation to ints and tests for run
-                List<char> CardNumbers = new List<char> { hands[j, 0][1], hands[j, 1][1], hands[j, 2][1] };
-                List<int> OrderedCardNumbers = new List<int> { 1, 1, 1};
-                for (int i = 0; i < 3; i++)
+                else
                 {
-                    ace = false;
-                    switch (CardNumbers[i])
-                    {
-                        case 'A':
-                            OrderedCardNumbers[i] = 1;
-                            ace = true;
-                            break;
-                        case 'J':
-                            OrderedCardNumbers[i] = 11;
-                            break;
-                        case 'Q':
-                            OrderedCardNumbers[i] = 12;
-                            break;
-                        case 'K':
-                            OrderedCardNumbers[i] = 13;
-                            break;
-                        default:
-                            OrderedCardNumbers[i] = CardNumbers[i];
-                            break;
-                    }
-                }
-                
-                OrderedCardNumbers.Sort();
-                if ((OrderedCardNumbers[0]+1) == OrderedCardNumbers[1] && ((OrderedCardNumbers[1] + 1) == OrderedCardNumbers[2]))
-                {
-                    score[j] = score[j] + 300;
-                    System.Diagnostics.Debug.WriteLine($"RUN: Player {j}'s score is {score[j]}");
-                    ran = true;
-                }
-                else if (OrderedCardNumbers.Contains(1) && OrderedCardNumbers.Contains(12) && OrderedCardNumbers.Contains(13))
-                {
-                    score[j] = score[j] + 300;
-                    System.Diagnostics.Debug.WriteLine($"RUN VIA KING QUEEN ACE: Player {j+1}'s score is {score[j]}");
-                    ran = true;
-                }
-
-                highCard[j] = OrderedCardNumbers[2];
-                if (ace)
-                {
-                    highCard[j] = 14;
-                }
-                
-                
-                //test for running flush
-
-                if (ran && flushed)
-                {
-                    score[j] = score[j] + 900;
-                }
-
-                //test for prial
-
-                if ((hands[j, 0][1] == hands[j, 1][1]) && (hands[j, 1][1] == hands[j, 2][1]))
-                {
-                    score[j] = score[j] + 1000;
-                    System.Diagnostics.Debug.WriteLine($"PRILEL: Player {j+1}'s score is {score[j]}");
-
-                }
-                //test for pair
-                else if ((hands[j, 0][1] == hands[j, 1][1]) || (hands[j, 1][1] == hands[j, 2][1]) || (hands[j, 0][1] == hands[j, 2][1]))
-                {
-                    score[j] = score[j] + 200;
-                    System.Diagnostics.Debug.WriteLine($"PAIR: Player {j+1}'s score is {score[j]}");
-                }
-                //add highest card
-                score[j] = score[j] + highCard[j];
-            }
-
-            int winningscore = 0;
-            for (int i = 0; i < playercount; i++)
-            {
-                if (score[i + 1] > score[i])
-                {
-                    winningscore = score[i + 1];
+                    return 30 + GetCardValue(hand[0]);
                 }
             }
-            winner = Array.IndexOf(score, winningscore);
-            
+            else if (hand[0][1] == hand[1][1])
+            {
+                // Pair
+                if (hand[0][1] == 'A')
+                {
+                    return 21;
+                }
+                else
+                {
+                    return 20 + GetCardValue(hand[0]);
+                }
+            }
+            else if (hand[0][0] == hand[1][0] && hand[1][0] == hand[2][0])
+            {
+                // Flush
+                return 15 + GetCardValue(hand[0]);
+            }
+            else if (GetCardValue(hand[0]) == 13 && GetCardValue(hand[1]) == 12 && GetCardValue(hand[2]) == 11)
+            {
+                // Run
+                return 14;
+            }
+            else
+            {
+                // High card
+                return GetCardValue(hand[0]);
+            }
+        }
+
+        public static List<int> GeneratePodium(string[,] hands, int pCount)
+        {
+            List<int> podium = new List<int>();
+
+            // Score each player's hand and store the scores in a dictionary
+            Dictionary<int, int> scores = new Dictionary<int, int>();
+            for (int i = 0; i < pCount; i++)
+            {
+                scores[i] = ScoreHand(hands, i);
+            }
+
+            // Sort the scores in descending order and add the player indices to the podium
+            var sortedScores = scores.OrderByDescending(x => x.Value);
+            foreach (var score in sortedScores)
+            {
+                podium.Add(score.Key);
+            }
+
+            return podium;
         }
     }
 }

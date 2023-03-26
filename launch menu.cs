@@ -23,5 +23,12 @@ namespace NEA
             howmany.Show();
             Hide();
         }
+
+        private void online_Click(object sender, EventArgs e)
+        {
+            var Login = new account_page();
+            Login.Show();
+            Hide();
+        }
     }
 }

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace NEA
 {
@@ -31,8 +32,18 @@ namespace NEA
 
         public void DisplayWinner()
         {
-            wtext.Text = $"Player {game.winner+1}";
-            plabel.Text = ($"Player {game.winner+1}'s hand");
+            // Get the podium of top scoring players
+            List<int> podium = game.GeneratePodium(game.hands, 6);
+
+            // Print the podium
+            Console.WriteLine("Podium:");
+            for (int i = 0; i < podium.Count; i++)
+            {
+                int playerIndex = podium[i];
+                Console.WriteLine($"#{i + 1}: Player {playerIndex + 1} scored {game.ScoreHand(game.hands, playerIndex)} points.");
+            }
+            wtext.Text = $"";
+            //plabel.Text = ($"Player {game.winner+1}'s hand");
         }
 
         private void button1_Click(object sender, EventArgs e)

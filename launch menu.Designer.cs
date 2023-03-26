@@ -64,6 +64,7 @@
             this.online.TabIndex = 2;
             this.online.Text = "Sign up or Log in (online)";
             this.online.UseVisualStyleBackColor = true;
+            this.online.Click += new System.EventHandler(this.online_Click);
             // 
             // label2
             // 

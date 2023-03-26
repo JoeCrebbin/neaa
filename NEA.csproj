@@ -151,6 +151,12 @@
     <Compile Include="launch menu.Designer.cs">
       <DependentUpon>launch menu.cs</DependentUpon>
     </Compile>
+    <Compile Include="onlinelobbies.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="onlinelobbies.Designer.cs">
+      <DependentUpon>onlinelobbies.cs</DependentUpon>
+    </Compile>
     <Compile Include="podium.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -170,6 +176,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="launch menu.resx">
       <DependentUpon>launch menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="onlinelobbies.resx">
+      <DependentUpon>onlinelobbies.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="podium.resx">
       <DependentUpon>podium.cs</DependentUpon>

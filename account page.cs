@@ -9,11 +9,13 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using Npgsql;
+using System.Security.Cryptography;
 
 namespace NEA
 {
     public partial class account_page : Form
     {
+        public static string currentPlayerName;
         public account_page()
         {
             InitializeComponent();
@@ -22,8 +24,9 @@ namespace NEA
         string connectionString = "Server=rogue.db.elephantsql.com;Port=5432;Database=cxdvhkfk;User Id=cxdvhkfk;Password=UfAT2N1gBo0FT2L-6n7kfNXgVx_a4pZs;";
 
         // handle register button click
-        private void button1_Click(object sender, EventArgs e)
+        private void btnRegister_Click(object sender, EventArgs e)
         {
+            Console.Beep();
             // create a new NpgsqlConnection object
             using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
             {
@@ -32,26 +35,37 @@ namespace NEA
                     // open the database connection
                     connection.Open();
 
-                    // check if the 'users' table exists in the database
-                    using (NpgsqlCommand command = new NpgsqlCommand("SELECT EXISTS (SELECT FROM information_schema.tables WHERE table_schema = 'public' AND table_name = 'users')", connection))
+                    // check if the 'players' table exists in the database
+                    using (NpgsqlCommand command = new NpgsqlCommand("SELECT EXISTS (SELECT FROM information_schema.tables WHERE table_schema = 'public' AND table_name = 'players')", connection))
                     {
                         bool tableExists = (bool)command.ExecuteScalar();
 
                         // if the table does not exist, create it
                         if (!tableExists)
                         {
-                            using (NpgsqlCommand createTableCommand = new NpgsqlCommand("CREATE TABLE users (id SERIAL PRIMARY KEY, username TEXT NOT NULL UNIQUE, password TEXT NOT NULL)", connection))
+                            using (NpgsqlCommand createTableCommand = new NpgsqlCommand("CREATE TABLE players (player_id SERIAL PRIMARY KEY, player_name TEXT NOT NULL UNIQUE, password TEXT NOT NULL, online_status BOOLEAN DEFAULT false, created_at TIMESTAMP DEFAULT NOW(), lobby_num INTEGER DEFAULT 0)", connection))
                             {
                                 createTableCommand.ExecuteNonQuery();
                             }
                         }
                     }
 
-                    // create a new user account
-                    using (NpgsqlCommand createUserCommand = new NpgsqlCommand("INSERT INTO users (username, password) VALUES (@username, @password)", connection))
+                    // create a new player account
+                    using (NpgsqlCommand createUserCommand = new NpgsqlCommand("INSERT INTO players (player_name, password) VALUES (@player_name, @password)", connection))
                     {
-                        createUserCommand.Parameters.AddWithValue("@username", txtUsername.Text);
-                        createUserCommand.Parameters.AddWithValue("@password", txtPassword.Text);
+                        createUserCommand.Parameters.AddWithValue("@player_name", txtUsername.Text);
+
+                        // hash the password using SHA256
+                        SHA256 sha256 = SHA256.Create();
+                        byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(txtPassword.Text));
+                        StringBuilder builder = new StringBuilder();
+                        for (int i = 0; i < bytes.Length; i++)
+                        {
+                            builder.Append(bytes[i].ToString("x2"));
+                        }
+                        string hashedPassword = builder.ToString();
+
+                        createUserCommand.Parameters.AddWithValue("@password", hashedPassword);
 
                         try
                         {
@@ -79,7 +93,7 @@ namespace NEA
         }
 
         // handle login button click
-        private void button2_Click(object sender, EventArgs e)
+        private void btnLogin_Click(object sender, EventArgs e)
         {
             // create a new NpgsqlConnection object
             using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
@@ -90,17 +104,49 @@ namespace NEA
                     connection.Open();
 
                     // authenticate the user
-                    using (NpgsqlCommand authenticateCommand = new NpgsqlCommand("SELECT COUNT(*) FROM users WHERE username = @username AND password = @password", connection))
+                    using (NpgsqlCommand authenticateCommand = new NpgsqlCommand("SELECT COUNT(*) FROM players WHERE player_name = @player_name AND password = @password", connection))
                     {
-                        authenticateCommand.Parameters.AddWithValue("@username", txtUsername.Text);
-                        authenticateCommand.Parameters.AddWithValue("@password", txtPassword.Text);
+                        authenticateCommand.Parameters.AddWithValue("@player_name", txtUsername.Text);
+
+                        // hash the password using SHA256
+                        SHA256 sha256 = SHA256.Create();
+                        byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(txtPassword.Text));
+                        StringBuilder builder = new StringBuilder();
+                        for (int i = 0; i < bytes.Length; i++)
+                        {
+                            builder.Append(bytes[i].ToString("x2"));
+                        }
+                        string hashedPassword = builder.ToString();
+                        authenticateCommand.Parameters.AddWithValue("@password", hashedPassword);
 
                         int userCount = Convert.ToInt32(authenticateCommand.ExecuteScalar());
 
+                        // if authentication succeeds, log the user in
                         if (userCount > 0)
                         {
+                            using (NpgsqlCommand setStatusCommand = new NpgsqlCommand("UPDATE players SET online_status = true WHERE player_name = @player_name", connection))
+                            {
+                                setStatusCommand.Parameters.AddWithValue("@player_name", txtUsername.Text);
+                                setStatusCommand.ExecuteNonQuery();
+                            }
+
                             MessageBox.Show("Login successful!");
+
+                            //set currently logged in player
+                            currentPlayerName = txtUsername.Text;
+
+                            // set player's online status to online in the database
+                            using (NpgsqlCommand updateCommand = new NpgsqlCommand("UPDATE players SET online_status = true WHERE player_name = @player_name", connection))
+                            {
+                                updateCommand.Parameters.AddWithValue("@player_name", txtUsername.Text);
+                                updateCommand.ExecuteNonQuery();
+                            }
+
+                            var startlobby = new onlinelobbies();
+                            startlobby.Show();
+                            Hide();
                         }
+                        // otherwise, show an error message
                         else
                         {
                             MessageBox.Show("Invalid username or password. Please try again.");

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.welcomemsg = new System.Windows.Forms.Label();
             this.LobbyBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -37,6 +38,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.Lobby2Btn = new System.Windows.Forms.Button();
             this.LeaveLobby1 = new System.Windows.Forms.Button();
+            this.startGameButton = new System.Windows.Forms.Button();
+            this.Lobby1Ready = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // welcomemsg
@@ -127,11 +131,40 @@
             this.LeaveLobby1.Visible = false;
             this.LeaveLobby1.Click += new System.EventHandler(this.LeaveLobby1_Click);
             // 
+            // startGameButton
+            // 
+            this.startGameButton.Enabled = false;
+            this.startGameButton.Location = new System.Drawing.Point(252, 200);
+            this.startGameButton.Name = "startGameButton";
+            this.startGameButton.Size = new System.Drawing.Size(75, 23);
+            this.startGameButton.TabIndex = 10;
+            this.startGameButton.Text = "Start Game";
+            this.startGameButton.UseVisualStyleBackColor = true;
+            // 
+            // Lobby1Ready
+            // 
+            this.Lobby1Ready.Location = new System.Drawing.Point(149, 285);
+            this.Lobby1Ready.Name = "Lobby1Ready";
+            this.Lobby1Ready.Size = new System.Drawing.Size(75, 23);
+            this.Lobby1Ready.TabIndex = 11;
+            this.Lobby1Ready.Text = "Ready";
+            this.Lobby1Ready.UseVisualStyleBackColor = true;
+            this.Lobby1Ready.Visible = false;
+            this.Lobby1Ready.Click += new System.EventHandler(this.Lobby1Ready_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 5000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
+            // 
             // onlinelobbies
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.Lobby1Ready);
+            this.Controls.Add(this.startGameButton);
             this.Controls.Add(this.LeaveLobby1);
             this.Controls.Add(this.Lobby2List);
             this.Controls.Add(this.label2);
@@ -159,5 +192,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button Lobby2Btn;
         private System.Windows.Forms.Button LeaveLobby1;
+        private System.Windows.Forms.Button startGameButton;
+        private System.Windows.Forms.Button Lobby1Ready;
+        private System.Windows.Forms.Timer timer1;
     }
 }

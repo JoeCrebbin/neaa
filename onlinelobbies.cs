@@ -122,9 +122,10 @@ namespace NEA
             // Update the lobby_num for the current player in the players table
             string updateQuery = "UPDATE players SET lobby_num = 1 WHERE player_name = @playerName;";
 
-            //swap leave and join
+            //swap leave and join, allow readys
             LobbyBtn.Hide();
             LeaveLobby1.Show();
+            Lobby1Ready.Show();
 
             using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
             {
@@ -181,9 +182,11 @@ namespace NEA
 
         private void LeaveLobby1_Click(object sender, EventArgs e)
         {
-            //swap leave and join
+            //swap leave and join, hide ready button
             LobbyBtn.Show();
             LeaveLobby1.Hide();
+            Lobby1Ready.Hide();
+            Lobby1Ready.Text = "Ready";
             // remove the player from the lobby table
             using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
                     {
@@ -266,6 +269,22 @@ namespace NEA
                 }
             }
         }
+        
+        
+
+        private int GetPlayerCount()
+        {
+            string query = "SELECT COUNT(*) FROM lobby1";
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                conn.Open();
+                using (var cmd = new NpgsqlCommand(query, conn))
+                {
+                    int playerCount = Convert.ToInt32(cmd.ExecuteScalar());
+                    return playerCount;
+                }
+            }
+        }
 
 
         private void RetrieveLobby1()
@@ -279,18 +298,135 @@ namespace NEA
                 {
                     connection.Open();
                     NpgsqlDataReader reader = command.ExecuteReader();
+
+                    // Create a list to store the players currently in the lobby
+                    List<string> currentPlayers = new List<string>();
+
                     while (reader.Read())
                     {
                         string playerName = reader.GetString(0);
+                        currentPlayers.Add(playerName);
+
                         if (!Lobby1List.Items.Contains(playerName))
                         {
                             Lobby1List.Items.Add(playerName);
                         }
                     }
                     reader.Close();
+
+                    // Remove any items in the list that don't match the current players in the lobby
+                    foreach (string playerName in Lobby1List.Items)
+                    {
+                        if (!currentPlayers.Contains(playerName))
+                        {
+                            Lobby1List.Items.Remove(playerName);
+                        }
+                    }
+                }
+            }
+        }
+
+
+        private void Lobby1Ready_Click(object sender, EventArgs e)
+        {
+            TogglePlayerReadyStatus();
+        }
+
+        private void SetPlayerReadyStatus(bool readyStatus)
+        {
+            string query = "UPDATE lobby1 SET ready_status = @status WHERE player_name = @playerName";
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                conn.Open();
+                using (var cmd = new NpgsqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("status", readyStatus);
+                    cmd.Parameters.AddWithValue("playerName", account_page.currentPlayerName);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        private void TogglePlayerReadyStatus()
+        {
+            // Get the current player's ready status
+            bool currentStatus = GetPlayerReadyStatus();
+
+            // Toggle the ready status
+            bool newStatus = !currentStatus;
+
+            // Update the player's ready status in the database
+            SetPlayerReadyStatus(newStatus);
+
+            // Update the "Ready" button text to reflect the new status
+            Lobby1Ready.Text = newStatus ? "Unready" : "Ready";
+        }
+        private bool GetPlayerReadyStatus()
+        {
+            string query = "SELECT ready_status FROM lobby1 WHERE player_name = @playerName";
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                conn.Open();
+                using (var cmd = new NpgsqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("playerName", account_page.currentPlayerName);
+                    var result = cmd.ExecuteScalar();
+                    if (result != null && result != DBNull.Value)
+                    {
+                        return Convert.ToBoolean(result);
+                    }
+                }
+            }
+            return false;
+        }
+
+        private void timer1_Tick_1(object sender, EventArgs e)
+        {
+            // Check if the current player is in the lobby
+            string query = $"SELECT COUNT(*) FROM lobby1 WHERE player_name = '{account_page.currentPlayerName}'";
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                conn.Open();
+                using (var cmd = new NpgsqlCommand(query, conn))
+                {
+                    int playerCount = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (playerCount == 0)
+                    {
+                        // Current player is not in the lobby, don't do anything
+                        return;
+                    }
                 }
             }
 
+            // Check if there are at least two players in the lobby
+            int totalPlayers = GetPlayerCount();
+            if (totalPlayers < 2)
+            {
+                // Not enough players in the lobby, disable the "Start Game" button
+                startGameButton.Enabled = false;
+                return;
+            }
+
+            // Check if all players in the lobby are ready
+            query = "SELECT COUNT(*) FROM lobby1 WHERE ready_status = true";
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                conn.Open();
+                using (var cmd = new NpgsqlCommand(query, conn))
+                {
+                    int readyCount = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (readyCount == totalPlayers)
+                    {
+                        // All players are ready, enable the "Start Game" button
+                        startGameButton.Enabled = true;
+                    }
+                    else
+                    {
+                        // Not all players are ready, disable the "Start Game" button
+                        startGameButton.Enabled = false;
+                    }
+                }
+            }
         }
     }
 }

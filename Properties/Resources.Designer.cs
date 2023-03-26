@@ -155,7 +155,7 @@ namespace NEA.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap card_back_black {
             get {
-                object obj = ResourceManager.GetObject("card back black", resourceCulture);
+                object obj = ResourceManager.GetObject("card_back_black", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

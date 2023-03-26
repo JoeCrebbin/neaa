@@ -220,7 +220,174 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\C2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\C3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\C4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\C5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\C6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\C7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\C8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\C9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\card back black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CJ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CT.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\D2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\D3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\D4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\D5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\D6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\D7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\D8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\D9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\deal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DJ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DT.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HJ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HT.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nextplayer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\revealhand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\S2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\S3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\S4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\S5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\S6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\S7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\S8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\S9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SJ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ST.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

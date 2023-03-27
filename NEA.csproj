@@ -145,6 +145,12 @@
     <Compile Include="game.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="gameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gameForm.Designer.cs">
+      <DependentUpon>gameForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="hmp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -156,6 +162,9 @@
     </Compile>
     <Compile Include="launch menu.Designer.cs">
       <DependentUpon>launch menu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="onlinegame.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="onlinelobbies.cs">
       <SubType>Form</SubType>
@@ -176,6 +185,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gameForm.resx">
+      <DependentUpon>gameForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="hmp.resx">
       <DependentUpon>hmp.cs</DependentUpon>

@@ -140,6 +140,7 @@
             this.startGameButton.TabIndex = 10;
             this.startGameButton.Text = "Start Game";
             this.startGameButton.UseVisualStyleBackColor = true;
+            this.startGameButton.Click += new System.EventHandler(this.startGameButton_Click);
             // 
             // Lobby1Ready
             // 
@@ -155,7 +156,7 @@
             // timer1
             // 
             this.timer1.Enabled = true;
-            this.timer1.Interval = 5000;
+            this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
             // 
             // onlinelobbies
@@ -186,7 +187,6 @@
         private System.Windows.Forms.Label welcomemsg;
         private System.Windows.Forms.Button LobbyBtn;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox Lobby1List;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ListBox Lobby2List;
         private System.Windows.Forms.Label label2;
@@ -195,5 +195,6 @@
         private System.Windows.Forms.Button startGameButton;
         private System.Windows.Forms.Button Lobby1Ready;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ListBox Lobby1List;
     }
 }

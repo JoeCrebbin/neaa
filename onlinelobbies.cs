@@ -220,56 +220,7 @@ namespace NEA
 
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Console.WriteLine("done");
-            // Get the current player's name
-            string currentPlayerName = account_page.currentPlayerName; // Replace with your code to get the current player's name
-
-            // Remove the player from lobby1
-            string connectionString = "Server=rogue.db.elephantsql.com;Port=5432;Database=cxdvhkfk;User Id=cxdvhkfk;Password=UfAT2N1gBo0FT2L-6n7kfNXgVx_a4pZs;";
-            string query = "DELETE FROM lobby1 WHERE player_name = @playerName;";
-
-            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
-            {
-                using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
-                {
-                    command.Parameters.Add("@playerName", NpgsqlDbType.Varchar).Value = currentPlayerName;
-                    connection.Open();
-                    int rowsAffected = command.ExecuteNonQuery();
-                    if (rowsAffected > 0)
-                    {
-                        // Success
-                    }
-                    else
-                    {
-                        // Error
-                    }
-                }
-            }
-
-            // Set the player's lobby_num to 0
-            string updateQuery = "UPDATE players SET lobby_num = 0 WHERE player_name = @playerName;";
-
-            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
-            {
-                using (NpgsqlCommand command = new NpgsqlCommand(updateQuery, connection))
-                {
-                    command.Parameters.Add("@playerName", NpgsqlDbType.Varchar).Value = currentPlayerName;
-                    connection.Open();
-                    int rowsAffected = command.ExecuteNonQuery();
-                    if (rowsAffected > 0)
-                    {
-                        // Success
-                    }
-                    else
-                    {
-                        // Error
-                    }
-                }
-            }
-        }
-        
+      
         
 
         private int GetPlayerCount()
@@ -427,6 +378,34 @@ namespace NEA
                     }
                 }
             }
+        }
+
+        private void startGameButton_Click(object sender, EventArgs e)
+        {
+            // Create new instance of game form
+            gameForm gameForm = new gameForm();
+            string connectionString = "Server=rogue.db.elephantsql.com;Port=5432;Database=cxdvhkfk;User Id=cxdvhkfk;Password=UfAT2N1gBo0FT2L-6n7kfNXgVx_a4pZs;";
+            using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
+            {
+                conn.Open();
+
+                string updateQuery = $"UPDATE lobby1 SET gamestarted = 'true' WHERE player_name = '{account_page.currentPlayerName}'";
+
+                using (NpgsqlCommand cmd = new NpgsqlCommand(updateQuery, conn))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+
+                conn.Close();
+            }
+
+
+            // Open the game form for the current player
+            gameForm.Show();
+
+            // Start checking if all players have started the game
+            int numPlayersTotal = Lobby1List.Items.Count;
+            gameForm.CheckAllPlayersStarted(numPlayersTotal);
         }
     }
 }

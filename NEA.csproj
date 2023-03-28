@@ -195,6 +195,9 @@
     <EmbeddedResource Include="launch menu.resx">
       <DependentUpon>launch menu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="onlinegame.resx">
+      <DependentUpon>onlinegame.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="onlinelobbies.resx">
       <DependentUpon>onlinelobbies.cs</DependentUpon>
     </EmbeddedResource>

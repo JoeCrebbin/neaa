@@ -26,7 +26,6 @@ namespace NEA
         // handle register button click
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            Console.Beep();
             // create a new NpgsqlConnection object
             using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
             {

@@ -24,16 +24,16 @@ namespace NEA
 
         public void afterGameShowHands()
         {
-            card1.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\{game.hands[game.winner, 0]}.png");
-            card2.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\{game.hands[game.winner, 1]}.png");
-            card3.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\{game.hands[game.winner, 2]}.png");
+            card1.Image = Properties.Resources.ResourceManager.GetObject(game.hands[game.winner, 0]) as Image;
+            card2.Image = Properties.Resources.ResourceManager.GetObject(game.hands[game.winner, 1]) as Image;
+            card3.Image = Properties.Resources.ResourceManager.GetObject(game.hands[game.winner, 2]) as Image;
             DisplayWinner();
         }
 
         public void DisplayWinner()
         {
             // Get the podium of top scoring players
-            List<int> podium = game.GeneratePodium(game.hands, 6);
+            List<int> podium = game.GeneratePodium(game.hands, hmp.selectedp);
 
             // Print the podium
             Console.WriteLine("Podium:");
@@ -52,9 +52,9 @@ namespace NEA
             {
                 temp--;
             }
-            card1.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\{game.hands[temp, 0]}.png");
-            card2.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\{game.hands[temp, 1]}.png");
-            card3.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\{game.hands[temp, 2]}.png");
+            card1.Image = Properties.Resources.ResourceManager.GetObject(game.hands[temp, 0]) as Image;
+            card2.Image = Properties.Resources.ResourceManager.GetObject(game.hands[temp, 1]) as Image;
+            card3.Image = Properties.Resources.ResourceManager.GetObject(game.hands[temp, 2]) as Image;
             plabel.Text = ($"Player {temp+1}'s hand");
         }
 
@@ -65,9 +65,9 @@ namespace NEA
             {
                 temp--;
             }
-            card1.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\{game.hands[temp, 0]}.png");
-            card2.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\{game.hands[temp, 1]}.png");
-            card3.Image = Image.FromFile($"{Application.StartupPath}\\Resources\\{game.hands[temp, 2]}.png");
+            card1.Image = Properties.Resources.ResourceManager.GetObject(game.hands[temp, 0]) as Image;
+            card2.Image = Properties.Resources.ResourceManager.GetObject(game.hands[temp, 1]) as Image;
+            card3.Image = Properties.Resources.ResourceManager.GetObject(game.hands[temp, 2]) as Image;
             plabel.Text = ($"Player {temp+ 1}'s hand");
         }
     }

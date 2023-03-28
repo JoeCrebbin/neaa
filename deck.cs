@@ -36,5 +36,11 @@ namespace NEA
             string hand = deck[deckIndex++];
             return hand;
         }
+
+        public string Assignonlinehand()
+        {
+            string onlinehand = (deck[deckIndex++]);
+            return onlinehand;
+        }
     }
 }

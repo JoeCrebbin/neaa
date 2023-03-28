@@ -9,11 +9,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace NEA
 {
     public partial class gameForm : Form
     {
+        public static string[] myhand = new string[3];
+        public static string[] midhand = new string[3];
+        public static int turncounter = 1;
+        public static int midindex;
+        public static string currentPlayerName = account_page.currentPlayerName;
+
         public gameForm()
         {
             InitializeComponent();
@@ -44,8 +51,11 @@ namespace NEA
 
                     started = numPlayersStarted == numPlayersTotal;
                 }
+                connection.Close();
             }
         }
+
+
 
         private void CheckAllPlayersStarted_Tick(object sender, EventArgs e)
         {
@@ -66,18 +76,195 @@ namespace NEA
             Console.WriteLine("HELLOOOOOO");
 
             waitmsg.Hide();
-            //deckcard.Show();
-            //p1card1.Show();
-            //p1card2.Show();
-            //p1card3.Show();
-            //midcard1.Show();
-            //midcard2.Show();
             //midcard3.Show();
             //button1.Show();
             //togglehide.Show();
             //knockbutton.Show();
+            //code to reset playernum
+            string connectionString = "Server=rogue.db.elephantsql.com;Port=5432;Database=cxdvhkfk;User Id=cxdvhkfk;Password=UfAT2N1gBo0FT2L-6n7kfNXgVx_a4pZs;";
+            string query = "UPDATE lobby1 SET player_num = subquery.row_num FROM (SELECT player_name, ROW_NUMBER() OVER (ORDER BY player_name) as row_num FROM lobby1) AS subquery WHERE lobby1.player_name = subquery.player_name;";
+
+            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            {
+                using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
             onlinegame.startGame(numPlayersTotal);
+            DisplayCards();
+
         }
+
+        public void DisplayHud()
+        {
+            button1.Show();
+            togglehide.Show();
+            knockbutton.Show();
+            label3.Show();
+            label4.Show();
+        }
+
+        public void HideHud()
+        {
+            button1.Hide();
+            togglehide.Hide();
+            knockbutton.Hide();
+            label3.Hide();
+            label4.Hide();
+        }
+
+        public void DisplayCards()
+        {
+            // Get the current player's hand from the lobby1 table
+            int playerNum = onlinegame.playerNum;
+            string connectionString = "Server=rogue.db.elephantsql.com;Port=5432;Database=cxdvhkfk;User Id=cxdvhkfk;Password=UfAT2N1gBo0FT2L-6n7kfNXgVx_a4pZs;";
+            string selectQuery = "SELECT hand1, hand2, hand3 FROM lobby1 WHERE player_num = @playerNum";
+
+            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (NpgsqlCommand command = new NpgsqlCommand(selectQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@playerNum", playerNum);
+
+                    using (NpgsqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            // Store the hand in an array called myhand
+                            myhand[0] = reader.GetString(0);
+                            myhand[1] = reader.GetString(1);
+                            myhand[2] = reader.GetString(2);
+
+                            // Now you can use myhand to do whatever you need to do with the player's hand
+                            p1card1.Show();
+                            p1card2.Show();
+                            p1card3.Show();
+                            p1card1.Image = Properties.Resources.ResourceManager.GetObject(myhand[0]) as Image;
+                            p1card2.Image = Properties.Resources.ResourceManager.GetObject(myhand[1]) as Image;
+                            p1card3.Image = Properties.Resources.ResourceManager.GetObject(myhand[2]) as Image;
+                        }
+                    }
+                }
+
+                using (NpgsqlCommand command = new NpgsqlCommand(selectQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@playerNum", 0);
+
+                    using (NpgsqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            // Store the hand in an array called myhand
+                            midhand[0] = reader.GetString(0);
+                            midhand[1] = reader.GetString(1);
+                            midhand[2] = reader.GetString(2);
+
+                            // Now you can use myhand to do whatever you need to do with the player's hand
+                            midcard1.Show();
+                            midcard2.Show();
+                            midcard3.Show();
+                            midcard1.Image = Properties.Resources.ResourceManager.GetObject(midhand[0]) as Image;
+                            midcard2.Image = Properties.Resources.ResourceManager.GetObject(midhand[1]) as Image;
+                            midcard3.Image = Properties.Resources.ResourceManager.GetObject(midhand[2]) as Image;
+                        }
+                    }
+                }
+                connection.Close();
+            }
+            if (playerNum == turncounter)
+            {
+                DisplayHud();
+            }
+            else
+            {
+                HideHud();
+            }
+
+        }
+
+        public void SwapHands()
+        {
+            string connectionString = "Server=rogue.db.elephantsql.com;Port=5432;Database=cxdvhkfk;User Id=cxdvhkfk;Password=UfAT2N1gBo0FT2L-6n7kfNXgVx_a4pZs;";
+            string selectQuery = "SELECT hand1, hand2, hand3 FROM lobby1 WHERE player_name = @playerName";
+            string updateQuery = "UPDATE lobby1 SET hand1 = @hand1, hand2 = @hand2, hand3 = @hand3 WHERE player_name = @playerName";
+            string midhandSelectQuery = "SELECT hand1, hand2, hand3 FROM lobby1 WHERE player_num = 0";
+
+            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            {
+                using (NpgsqlCommand selectCommand = new NpgsqlCommand(selectQuery, connection))
+                {
+                    using (NpgsqlCommand updateCommand = new NpgsqlCommand(updateQuery, connection))
+                    {
+                        using (NpgsqlCommand midhandSelectCommand = new NpgsqlCommand(midhandSelectQuery, connection))
+                        {
+                            connection.Open();
+
+                            selectCommand.Parameters.AddWithValue("@playerName", currentPlayerName);
+
+                            // get the current player's hand
+                            using (NpgsqlDataReader reader = selectCommand.ExecuteReader())
+                            {
+                                if (reader.Read())
+                                {
+                                    string hand1 = reader.GetString(0);
+                                    string hand2 = reader.GetString(1);
+                                    string hand3 = reader.GetString(2);
+
+                                    reader.Close();
+
+                                    // get the midhand's hand
+                                    using (NpgsqlDataReader midhandReader = midhandSelectCommand.ExecuteReader())
+                                    {
+                                        if (midhandReader.Read())
+                                        {
+                                            string midhandHand1 = midhandReader.GetString(0);
+                                            string midhandHand2 = midhandReader.GetString(1);
+                                            string midhandHand3 = midhandReader.GetString(2);
+
+                                            midhandReader.Close();
+
+                                            // update the current player's hand with the midhand's hand
+                                            updateCommand.Parameters.Clear();
+                                            updateCommand.Parameters.AddWithValue("@hand1", midhandHand1);
+                                            updateCommand.Parameters.AddWithValue("@hand2", midhandHand2);
+                                            updateCommand.Parameters.AddWithValue("@hand3", midhandHand3);
+                                            updateCommand.Parameters.AddWithValue("@playerName", currentPlayerName);
+
+                                            updateCommand.ExecuteNonQuery();
+
+                                            // update the midhand's hand with the current player's hand
+                                            updateCommand.Parameters.Clear();
+                                            updateCommand.Parameters.AddWithValue("@hand1", hand1);
+                                            updateCommand.Parameters.AddWithValue("@hand2", hand2);
+                                            updateCommand.Parameters.AddWithValue("@hand3", hand3);
+                                            updateCommand.Parameters.AddWithValue("@playerName", "midhand");
+
+                                            updateCommand.ExecuteNonQuery();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            DisplayCards();
+
+        }
+
+        private static void CheckIfPlayerTurn()
+        {
+            if (turncounter == onlinegame.playerNum) ;
+            {
+
+            }
+        }
+
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             string connectionString = "Server=rogue.db.elephantsql.com;Port=5432;Database=cxdvhkfk;User Id=cxdvhkfk;Password=UfAT2N1gBo0FT2L-6n7kfNXgVx_a4pZs;";
@@ -146,5 +333,107 @@ namespace NEA
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SwapHands();
+        }
+
+        private void knockbutton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void togglehide_Click(object sender, EventArgs e)
+        {
+            turncounter++;
+            HideHud();
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CheckForGameUpdates()
+        {
+
+        }
+
+        private bool midbeforehand = false;
+
+        private void midcard1_Click(object sender, EventArgs e)
+        {
+            if (midbeforehand == false)
+            {
+                onlinegame.swapCard1(0);
+                midbeforehand = true;
+                midindex = 0;
+
+            }
+        }
+
+        private void midcard2_Click(object sender, EventArgs e)
+        {
+            if (midbeforehand == false)
+            {
+                onlinegame.swapCard1(1);
+                midbeforehand = true;
+                midindex = 1;
+            }
+        }
+
+        private void midcard3_Click(object sender, EventArgs e)
+        {
+            if (midbeforehand == false)
+            {
+                onlinegame.swapCard1(2);
+                midbeforehand = true;
+                midindex = 2;
+            }
+        }
+
+        private void p1card1_Click(object sender, EventArgs e)
+        {
+            if (midbeforehand == true)
+            {
+                onlinegame.swapCard2(0, midindex);
+                midbeforehand = false;
+                DisplayCards();
+
+            }
+            midbeforehand = false;
+
+        }
+
+        private void p1card2_Click(object sender, EventArgs e)
+        {
+
+            if (midbeforehand == true)
+            {
+                onlinegame.swapCard2(1, midindex);
+                midbeforehand = false;
+                DisplayCards();
+
+            }
+            midbeforehand = false;
+
+        }
+
+        private void p1card3_Click(object sender, EventArgs e)
+        {
+            if (midbeforehand == true)
+            {
+                onlinegame.swapCard2(2, midindex);
+                midbeforehand = false;
+                DisplayCards();
+            }
+            midbeforehand = false;
+
+        }
     }
 }

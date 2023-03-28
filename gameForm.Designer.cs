@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.waitmsg = new System.Windows.Forms.Label();
             this.knockbutton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -42,6 +43,7 @@
             this.p1card2 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.deckcard = new System.Windows.Forms.PictureBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.midcard3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.midcard1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.midcard2)).BeginInit();
@@ -71,6 +73,7 @@
             this.knockbutton.Text = "Knock?";
             this.knockbutton.UseVisualStyleBackColor = true;
             this.knockbutton.Visible = false;
+            this.knockbutton.Click += new System.EventHandler(this.knockbutton_Click);
             // 
             // button1
             // 
@@ -82,6 +85,7 @@
             this.button1.Text = "Swap all cards";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Visible = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label4
             // 
@@ -93,6 +97,7 @@
             this.label4.TabIndex = 27;
             this.label4.Text = "Middle Cards:";
             this.label4.Visible = false;
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label3
             // 
@@ -115,6 +120,7 @@
             this.togglehide.Text = "Hide Cards \r\n(End Turn)";
             this.togglehide.UseVisualStyleBackColor = true;
             this.togglehide.Visible = false;
+            this.togglehide.Click += new System.EventHandler(this.togglehide_Click);
             // 
             // midcard3
             // 
@@ -126,6 +132,7 @@
             this.midcard3.TabIndex = 24;
             this.midcard3.TabStop = false;
             this.midcard3.Visible = false;
+            this.midcard3.Click += new System.EventHandler(this.midcard3_Click);
             // 
             // midcard1
             // 
@@ -138,6 +145,7 @@
             this.midcard1.TabIndex = 23;
             this.midcard1.TabStop = false;
             this.midcard1.Visible = false;
+            this.midcard1.Click += new System.EventHandler(this.midcard1_Click);
             // 
             // midcard2
             // 
@@ -149,6 +157,7 @@
             this.midcard2.TabIndex = 22;
             this.midcard2.TabStop = false;
             this.midcard2.Visible = false;
+            this.midcard2.Click += new System.EventHandler(this.midcard2_Click);
             // 
             // p1card3
             // 
@@ -160,6 +169,7 @@
             this.p1card3.TabIndex = 21;
             this.p1card3.TabStop = false;
             this.p1card3.Visible = false;
+            this.p1card3.Click += new System.EventHandler(this.p1card3_Click);
             // 
             // p1card1
             // 
@@ -172,6 +182,7 @@
             this.p1card1.TabIndex = 20;
             this.p1card1.TabStop = false;
             this.p1card1.Visible = false;
+            this.p1card1.Click += new System.EventHandler(this.p1card1_Click);
             // 
             // p1card2
             // 
@@ -183,6 +194,7 @@
             this.p1card2.TabIndex = 19;
             this.p1card2.TabStop = false;
             this.p1card2.Visible = false;
+            this.p1card2.Click += new System.EventHandler(this.p1card2_Click);
             // 
             // label1
             // 
@@ -207,6 +219,10 @@
             this.deckcard.TabIndex = 17;
             this.deckcard.TabStop = false;
             this.deckcard.Visible = false;
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // gameForm
             // 
@@ -257,5 +273,6 @@
         public System.Windows.Forms.PictureBox p1card2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox deckcard;
+        private System.Windows.Forms.Timer timer1;
     }
 }

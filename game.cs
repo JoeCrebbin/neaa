@@ -102,6 +102,7 @@ namespace NEA
             // Sort the player's hand in descending order of card value
             string[] hand = new string[3] { hands[playerIndex, 0], hands[playerIndex, 1], hands[playerIndex, 2] };
             Array.Sort(hand, (x, y) => GetCardValue(y).CompareTo(GetCardValue(x)));
+            Console.WriteLine($"{hand[0]}, {hand[1]} and {hand[2]}");
 
             // Check for special hands
             if (hand[0][1] == hand[1][1] && hand[1][1] == hand[2][1])

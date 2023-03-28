@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,12 @@ namespace NEA
         public static string[] midhand = new string[3];
         public static int turncounter = 1;
         public static int midindex;
+        public int pCount;
+        public bool knocked = false;
+        public int currentplayernum;
         public static string currentPlayerName = account_page.currentPlayerName;
+
+
 
         public gameForm()
         {
@@ -80,6 +86,7 @@ namespace NEA
             //button1.Show();
             //togglehide.Show();
             //knockbutton.Show();
+
             //code to reset playernum
             string connectionString = "Server=rogue.db.elephantsql.com;Port=5432;Database=cxdvhkfk;User Id=cxdvhkfk;Password=UfAT2N1gBo0FT2L-6n7kfNXgVx_a4pZs;";
             string query = "UPDATE lobby1 SET player_num = subquery.row_num FROM (SELECT player_name, ROW_NUMBER() OVER (ORDER BY player_name) as row_num FROM lobby1) AS subquery WHERE lobby1.player_name = subquery.player_name;";
@@ -93,6 +100,45 @@ namespace NEA
                     connection.Close();
                 }
             }
+
+            //stores number of players locally
+
+            using (NpgsqlConnection con = new NpgsqlConnection(connectionString))
+            {
+                con.Open();
+
+                using (NpgsqlCommand countCommand = new NpgsqlCommand("SELECT COUNT(*) FROM lobby1", con))
+                {
+                    pCount = Convert.ToInt32(countCommand.ExecuteScalar());
+                    pCount--;
+                    
+                }
+
+                con.Close();
+            }
+
+
+            //store currentplayernum locally
+            string selectQuery = "SELECT player_num FROM lobby1 WHERE player_name = @playerName";
+
+            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            {
+                using (NpgsqlCommand selectCommand = new NpgsqlCommand(selectQuery, connection))
+                {
+                    connection.Open();
+
+                    selectCommand.Parameters.AddWithValue("@playerName", currentPlayerName);
+
+                    using (NpgsqlDataReader reader = selectCommand.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            currentplayernum = reader.GetInt32(0);
+                        }
+                    }
+                }
+            }
+
             onlinegame.startGame(numPlayersTotal);
             DisplayCards();
 
@@ -102,7 +148,10 @@ namespace NEA
         {
             button1.Show();
             togglehide.Show();
-            knockbutton.Show();
+            if (knocked == false)
+            {
+                knockbutton.Show();
+            }
             label3.Show();
             label4.Show();
         }
@@ -176,14 +225,14 @@ namespace NEA
                 }
                 connection.Close();
             }
-            if (playerNum == turncounter)
-            {
-                DisplayHud();
-            }
-            else
-            {
-                HideHud();
-            }
+            //if (playerNum == turncounter)
+           // {
+            //    DisplayHud();
+          //  }
+            //else
+            //{
+            //    HideHud();
+           // }
 
         }
 
@@ -321,31 +370,46 @@ namespace NEA
                     command.Parameters.Add("@playerName", NpgsqlDbType.Varchar).Value = account_page.currentPlayerName;
                     connection.Open();
                     int rowsAffected = command.ExecuteNonQuery();
-                    if (rowsAffected > 0)
-                    {
-                        // Success
-                    }
-                    else
-                    {
-                        // Error
-                    }
                 }
             }
+        }
+
+        private void nextTurn()
+        {
+            if (knocked == false)
+            {
+                knockbutton.Show();
+            }
+
+        }
+
+        private void myTurn()
+        {
+            DisplayHud();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             SwapHands();
+            button1.Hide();
         }
 
         private void knockbutton_Click(object sender, EventArgs e)
         {
-
+            knocked = true;
+            knockbutton.Hide();
         }
 
         private void togglehide_Click(object sender, EventArgs e)
         {
-            turncounter++;
+            if (turncounter == pCount)
+            {
+                turncounter = 1;
+            }
+            else
+            {
+                turncounter++;
+            }
             HideHud();
         }
 
@@ -356,13 +420,9 @@ namespace NEA
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-
+            CheckTurnStatus();
         }
 
-        private void CheckForGameUpdates()
-        {
-
-        }
 
         private bool midbeforehand = false;
 
@@ -435,5 +495,39 @@ namespace NEA
             midbeforehand = false;
 
         }
+
+        private void deckcard_Click(object sender, EventArgs e)
+        {
+
+        }
+        public void CheckTurnStatus()
+        {
+            Console.WriteLine("it runnin");
+
+            string connectionString = "Server=rogue.db.elephantsql.com;Port=5432;Database=cxdvhkfk;User Id=cxdvhkfk;Password=UfAT2N1gBo0FT2L-6n7kfNXgVx_a4pZs;";
+            using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
+            {
+                conn.Open();
+                // Retrieve the turn status of the current player
+                string query = "SELECT turnStatus FROM lobby1 WHERE player_name = @PlayerName";
+                using (NpgsqlCommand command = new NpgsqlCommand(query, conn))
+                {
+                    command.Parameters.AddWithValue("@PlayerName", currentPlayerName);
+                    using (NpgsqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            bool turnStatus = reader.GetBoolean(0);
+                            if (turnStatus)
+                            {
+                                myTurn();
+                                Console.WriteLine("ur turn");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }

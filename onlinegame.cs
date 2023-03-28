@@ -53,6 +53,7 @@ namespace NEA
                 }
             }
 
+
         }
 
         public static void startGame(int pCount)
@@ -100,6 +101,20 @@ namespace NEA
                         command.Parameters.AddWithValue("@midhand3", dealer.Assignonlinehand());
                         command.ExecuteNonQuery();
                     }
+                }
+                // Connect to the database
+                using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+                {
+                    connection.Open();
+                    // Construct the SQL command
+                    string sql = "UPDATE lobby1 SET turnstatus = true WHERE player_name = @PlayerName;";
+                    using (NpgsqlCommand command = new NpgsqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("PlayerName", currentPlayerName);
+                        // Execute the command
+                        command.ExecuteNonQuery();
+                    }
+                        
                 }
             }
 
@@ -321,6 +336,6 @@ namespace NEA
         private void p1card1_Click(object sender, EventArgs e)
         {
 
-        }
+        }   
     }
 }

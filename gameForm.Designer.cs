@@ -219,9 +219,11 @@
             this.deckcard.TabIndex = 17;
             this.deckcard.TabStop = false;
             this.deckcard.Visible = false;
+            this.deckcard.Click += new System.EventHandler(this.deckcard_Click);
             // 
             // timer1
             // 
+            this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // gameForm

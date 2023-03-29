@@ -38,12 +38,19 @@ namespace NEA
         public void CheckAllPlayersStarted(int lobbycount)
         {
             Console.WriteLine("method ran");
-
+            pCount = lobbycount;
             // Create a new timer with a 1 second interval
             Timer timer = new Timer();
             timer.Interval = 1000;
             timer.Tick += new EventHandler(CheckAllPlayersStarted_Tick);
             timer.Start();
+        }
+
+
+
+        private void CheckAllPlayersStarted_Tick(object sender, EventArgs e)
+        {
+            Console.WriteLine("clock started");
             string connectionString = "Server=rogue.db.elephantsql.com;Port=5432;Database=cxdvhkfk;User Id=cxdvhkfk;Password=UfAT2N1gBo0FT2L-6n7kfNXgVx_a4pZs;";
 
             using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
@@ -54,20 +61,12 @@ namespace NEA
                 using (NpgsqlCommand command = new NpgsqlCommand($"SELECT COUNT(*) FROM lobby1 WHERE gamestarted = true", connection))
                 {
                     int numPlayersStarted = Convert.ToInt32(command.ExecuteScalar());
-                    numPlayersTotal = lobbycount;
+                    numPlayersTotal = pCount;
 
                     started = numPlayersStarted == numPlayersTotal;
                     Console.WriteLine("should have started ngl");
                 }
             }
-        }
-
-
-
-        private void CheckAllPlayersStarted_Tick(object sender, EventArgs e)
-        {
-            Console.WriteLine("clock started");
-
             if (started)
             {
                 // All players are ready, close the timer and start the game

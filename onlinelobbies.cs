@@ -119,6 +119,7 @@ namespace NEA
 
         private void button1_Click(object sender, EventArgs e)
         {
+            RetrieveLobby1();
             // Update the lobby_num for the current player in the players table
             string updateQuery = "UPDATE players SET lobby_num = 1 WHERE player_name = @playerName;";
 
@@ -280,6 +281,7 @@ namespace NEA
 
         private void Lobby1Ready_Click(object sender, EventArgs e)
         {
+            RetrieveLobby1();
             TogglePlayerReadyStatus();
         }
 
@@ -382,6 +384,7 @@ namespace NEA
 
         private void startGameButton_Click(object sender, EventArgs e)
         {
+            RetrieveLobby1();
             // Create new instance of game form
             gameForm gameForm = new gameForm();
             string connectionString = "Server=rogue.db.elephantsql.com;Port=5432;Database=cxdvhkfk;User Id=cxdvhkfk;Password=UfAT2N1gBo0FT2L-6n7kfNXgVx_a4pZs;";

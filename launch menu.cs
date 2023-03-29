@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -29,6 +30,21 @@ namespace NEA
             var Login = new account_page();
             Login.Show();
             Hide();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string connectionString = "Server=rogue.db.elephantsql.com;Port=5432;Database=cxdvhkfk;User Id=cxdvhkfk;Password=UfAT2N1gBo0FT2L-6n7kfNXgVx_a4pZs;";
+
+            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            {
+                string delquery = "DELETE FROM lobby1;";
+                connection.Open();
+                using (NpgsqlCommand command = new NpgsqlCommand(delquery, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

@@ -16,7 +16,7 @@ namespace NEA
         public static bool flushed;
         public static bool ace;
         public static string currentPlayerName = account_page.currentPlayerName;
-
+        public static bool dealt;
         public static int[] highCard = new int[6];
         public static int winner = 0;
         public static bool ran;
@@ -40,13 +40,11 @@ namespace NEA
 
                     if (playerNum == 1)
                     {
-                        connection.Close();
                         Console.WriteLine("The player has player_num 0.");
                         return true;
                     }
                     else
                     {
-                        connection.Close();
                         Console.WriteLine("The player does not have player_num 0.");
                         return false;
                     }
@@ -59,8 +57,9 @@ namespace NEA
         public static void startGame(int pCount)
         {
             //test if player is "admin"
-            if (onlinegame.isAdmin(account_page.currentPlayerName) == true)
+            if (isAdmin(account_page.currentPlayerName) == true)
             {
+                dealt = true;
                 // code for dealing all hands
                 Deck dealer = new Deck();
                 dealer.shuffleDeck();
@@ -79,7 +78,7 @@ namespace NEA
                             {
                                 connection.Open();
 
-                                for (int i = 1; i < pCount+1; i++)
+                                for (int i = 1; i <= pCount+1; i++)
                                 {
                                     command.Parameters.Clear();
                                     command.Parameters.AddWithValue("@hand1", dealer.Assignonlinehand());
@@ -116,6 +115,9 @@ namespace NEA
                     }
                         
                 }
+                gameForm gameForm = new gameForm();
+                gameForm.DisplayCards();
+
             }
 
         }

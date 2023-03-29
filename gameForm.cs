@@ -22,6 +22,7 @@ namespace NEA
         public static int midindex;
         public int pCount;
         public bool knocked = false;
+        public bool myturnran = false;
         public int currentplayernum;
         public static string currentPlayerName = account_page.currentPlayerName;
 
@@ -56,8 +57,8 @@ namespace NEA
                     numPlayersTotal = lobbycount;
 
                     started = numPlayersStarted == numPlayersTotal;
+                    Console.WriteLine("should have started ngl");
                 }
-                connection.Close();
             }
         }
 
@@ -140,7 +141,6 @@ namespace NEA
             }
 
             onlinegame.startGame(numPlayersTotal);
-            DisplayCards();
 
         }
 
@@ -167,63 +167,66 @@ namespace NEA
 
         public void DisplayCards()
         {
-            // Get the current player's hand from the lobby1 table
-            int playerNum = onlinegame.playerNum;
-            string connectionString = "Server=rogue.db.elephantsql.com;Port=5432;Database=cxdvhkfk;User Id=cxdvhkfk;Password=UfAT2N1gBo0FT2L-6n7kfNXgVx_a4pZs;";
-            string selectQuery = "SELECT hand1, hand2, hand3 FROM lobby1 WHERE player_num = @playerNum";
-
-            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            if (onlinegame.dealt)
             {
-                connection.Open();
+                // Get the current player's hand from the lobby1 table
+                string connectionString = "Server=rogue.db.elephantsql.com;Port=5432;Database=cxdvhkfk;User Id=cxdvhkfk;Password=UfAT2N1gBo0FT2L-6n7kfNXgVx_a4pZs;";
+                string selectQuery = "SELECT hand1, hand2, hand3 FROM lobby1 WHERE player_name = @playerName";
 
-                using (NpgsqlCommand command = new NpgsqlCommand(selectQuery, connection))
+
+                using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
                 {
-                    command.Parameters.AddWithValue("@playerNum", playerNum);
+                    connection.Open();
 
-                    using (NpgsqlDataReader reader = command.ExecuteReader())
+                    using (NpgsqlCommand command = new NpgsqlCommand(selectQuery, connection))
                     {
-                        if (reader.Read())
-                        {
-                            // Store the hand in an array called myhand
-                            myhand[0] = reader.GetString(0);
-                            myhand[1] = reader.GetString(1);
-                            myhand[2] = reader.GetString(2);
+                        command.Parameters.AddWithValue("@playerName", currentPlayerName);
 
-                            // Now you can use myhand to do whatever you need to do with the player's hand
-                            p1card1.Show();
-                            p1card2.Show();
-                            p1card3.Show();
-                            p1card1.Image = Properties.Resources.ResourceManager.GetObject(myhand[0]) as Image;
-                            p1card2.Image = Properties.Resources.ResourceManager.GetObject(myhand[1]) as Image;
-                            p1card3.Image = Properties.Resources.ResourceManager.GetObject(myhand[2]) as Image;
+                        using (NpgsqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                // Store the hand in an array called myhand
+                                myhand[0] = reader.GetString(0);
+                                myhand[1] = reader.GetString(1);
+                                myhand[2] = reader.GetString(2);
+
+
+                                p1card1.Show();
+                                p1card2.Show();
+                                p1card3.Show();
+                                p1card1.Image = Properties.Resources.ResourceManager.GetObject(myhand[0]) as Image;
+                                p1card2.Image = Properties.Resources.ResourceManager.GetObject(myhand[1]) as Image;
+                                p1card3.Image = Properties.Resources.ResourceManager.GetObject(myhand[2]) as Image;
+                            }
                         }
                     }
-                }
 
-                using (NpgsqlCommand command = new NpgsqlCommand(selectQuery, connection))
-                {
-                    command.Parameters.AddWithValue("@playerNum", 0);
-
-                    using (NpgsqlDataReader reader = command.ExecuteReader())
+                    using (NpgsqlCommand command = new NpgsqlCommand(selectQuery, connection))
                     {
-                        if (reader.Read())
-                        {
-                            // Store the hand in an array called myhand
-                            midhand[0] = reader.GetString(0);
-                            midhand[1] = reader.GetString(1);
-                            midhand[2] = reader.GetString(2);
+                        command.Parameters.AddWithValue("@playerName", "midhand");
 
-                            // Now you can use myhand to do whatever you need to do with the player's hand
-                            midcard1.Show();
-                            midcard2.Show();
-                            midcard3.Show();
-                            midcard1.Image = Properties.Resources.ResourceManager.GetObject(midhand[0]) as Image;
-                            midcard2.Image = Properties.Resources.ResourceManager.GetObject(midhand[1]) as Image;
-                            midcard3.Image = Properties.Resources.ResourceManager.GetObject(midhand[2]) as Image;
+                        using (NpgsqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                // Store the hand in an array called myhand
+                                midhand[0] = reader.GetString(0);
+                                midhand[1] = reader.GetString(1);
+                                midhand[2] = reader.GetString(2);
+
+                                // Now you can use myhand to do whatever you need to do with the player's hand
+                                midcard1.Show();
+                                midcard2.Show();
+                                midcard3.Show();
+                                midcard1.Image = Properties.Resources.ResourceManager.GetObject(midhand[0]) as Image;
+                                midcard2.Image = Properties.Resources.ResourceManager.GetObject(midhand[1]) as Image;
+                                midcard3.Image = Properties.Resources.ResourceManager.GetObject(midhand[2]) as Image;
+                            }
                         }
                     }
+                    connection.Close();
                 }
-                connection.Close();
             }
             //if (playerNum == turncounter)
            // {
@@ -385,7 +388,11 @@ namespace NEA
 
         private void myTurn()
         {
-            DisplayHud();
+            if (myturnran == false)
+            {
+                DisplayHud();
+
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -521,13 +528,22 @@ namespace NEA
                             if (turnStatus)
                             {
                                 myTurn();
+                                myturnran = true;
                                 Console.WriteLine("ur turn");
                             }
                         }
                     }
                 }
+                DisplayCards();
+
             }
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DisplayCards();
+            DisplayHud();
+            waitmsg.Hide();
+        }
     }
 }

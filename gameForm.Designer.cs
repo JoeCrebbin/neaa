@@ -45,6 +45,7 @@
             this.deckcard = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.button2 = new System.Windows.Forms.Button();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.midcard3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.midcard1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.midcard2)).BeginInit();
@@ -237,6 +238,11 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // timer2
+            // 
+            this.timer2.Enabled = true;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
             // gameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -289,5 +295,6 @@
         private System.Windows.Forms.PictureBox deckcard;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Timer timer2;
     }
 }

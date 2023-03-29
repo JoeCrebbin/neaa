@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,12 +41,12 @@ namespace NEA
 
                     if (playerNum == 1)
                     {
-                        Console.WriteLine("The player has player_num 0.");
+                        Console.WriteLine("The player has player_num 1.");
                         return true;
                     }
                     else
                     {
-                        Console.WriteLine("The player does not have player_num 0.");
+                        Console.WriteLine("The player does not have player_num 1.");
                         return false;
                     }
                 }
@@ -54,7 +55,7 @@ namespace NEA
 
         }
 
-        public static void startGame(int pCount)
+        public static void dealCards(int pCount)
         {
             //test if player is "admin"
             if (isAdmin(account_page.currentPlayerName) == true)
@@ -116,8 +117,7 @@ namespace NEA
                         
                 }
                 gameForm gameForm = new gameForm();
-                gameForm.DisplayCards();
-
+                UpdatePlayerGameState("playing");
             }
 
         }
@@ -333,6 +333,27 @@ namespace NEA
             this.ResumeLayout(false);
             this.PerformLayout();
 
+        }
+
+        public static void UpdatePlayerGameState(string state)
+        {
+            // Connect to the database
+            using (NpgsqlConnection conn = new NpgsqlConnection("Server=rogue.db.elephantsql.com;Port=5432;Database=cxdvhkfk;User Id=cxdvhkfk;Password=UfAT2N1gBo0FT2L-6n7kfNXgVx_a4pZs;"))
+            {
+                conn.Open();
+
+                // Create the SQL statement to update the game_state column
+                string sql = $"UPDATE lobby1 SET game_state = '{state}' WHERE player_name = '{account_page.currentPlayerName}';";
+
+                Console.WriteLine($"set {account_page.currentPlayerName} to {state}");
+
+                // Create the command object
+                using (NpgsqlCommand cmd = new NpgsqlCommand(sql, conn))
+                {
+                    // Execute the command
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         private void p1card1_Click(object sender, EventArgs e)

@@ -18,6 +18,7 @@ namespace NEA
 {
     public partial class onlinelobbies : Form
     {
+        public static int numPlayersTotal;
         string connectionString = "Server=rogue.db.elephantsql.com;Port=5432;Database=cxdvhkfk;User Id=cxdvhkfk;Password=UfAT2N1gBo0FT2L-6n7kfNXgVx_a4pZs;";
         public onlinelobbies()
         {
@@ -407,7 +408,7 @@ namespace NEA
             gameForm.Show();
 
             // Start checking if all players have started the game
-            int numPlayersTotal = Lobby1List.Items.Count;
+            numPlayersTotal = Lobby1List.Items.Count;
             gameForm.CheckAllPlayersStarted(numPlayersTotal);
         }
     }

@@ -68,6 +68,30 @@
     <Compile Include="launch menu.Designer.cs">
       <DependentUpon>launch menu.cs</DependentUpon>
     </Compile>
+<<<<<<< Updated upstream
+=======
+    <Compile Include="onlinegame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="onlinelobbies.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="onlinelobbies.Designer.cs">
+      <DependentUpon>onlinelobbies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="online_podium.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="online_podium.Designer.cs">
+      <DependentUpon>online_podium.cs</DependentUpon>
+    </Compile>
+    <Compile Include="podium.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="podium.Designer.cs">
+      <DependentUpon>podium.cs</DependentUpon>
+    </Compile>
+>>>>>>> Stashed changes
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -79,6 +103,21 @@
     <EmbeddedResource Include="launch menu.resx">
       <DependentUpon>launch menu.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< Updated upstream
+=======
+    <EmbeddedResource Include="onlinegame.resx">
+      <DependentUpon>onlinegame.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="onlinelobbies.resx">
+      <DependentUpon>onlinelobbies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="online_podium.resx">
+      <DependentUpon>online_podium.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="podium.resx">
+      <DependentUpon>podium.cs</DependentUpon>
+    </EmbeddedResource>
+>>>>>>> Stashed changes
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>

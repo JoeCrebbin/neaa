@@ -21,6 +21,7 @@ namespace NEA
         public static int turncounter = 1;
         string connectionString = "Server=rogue.db.elephantsql.com;Port=5432;Database=cxdvhkfk;User Id=cxdvhkfk;Password=UfAT2N1gBo0FT2L-6n7kfNXgVx_a4pZs;";
         public static int midindex;
+        public static bool currentPlayerKnocked = false;
         public int pCount = onlinelobbies.numPlayersTotal;
         public bool knocked = false;
         public bool myturnran = false;
@@ -102,22 +103,6 @@ namespace NEA
                 }
             }
 
-            //stores number of players locally
-
-            using (NpgsqlConnection con = new NpgsqlConnection(connectionString))
-            {
-                con.Open();
-
-                using (NpgsqlCommand countCommand = new NpgsqlCommand("SELECT COUNT(*) FROM lobby1", con))
-                {
-                    pCount = Convert.ToInt32(countCommand.ExecuteScalar());
-                    pCount--;
-
-                }
-
-                con.Close();
-            }
-
 
             //store currentplayernum locally
             string selectQuery = "SELECT player_num FROM lobby1 WHERE player_name = @playerName";
@@ -147,24 +132,7 @@ namespace NEA
 
         public void DisplayHud()
         {
-            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
-            {
-                connection.Open();
-
-                // Check if any player has knocked
-                using (NpgsqlCommand command = new NpgsqlCommand("SELECT COUNT(*) FROM lobby1 WHERE knocked = true", connection))
-                {
-                    int numKnocked = Convert.ToInt32(command.ExecuteScalar());
-
-                    if (numKnocked == 0)
-                    {
-                        knockbutton.Show();
-                    }
-                }
-
-                connection.Close();
-            }
-
+            knockbutton.Show();
             button1.Show();
             togglehide.Show();
             label3.Show();
@@ -392,24 +360,6 @@ namespace NEA
             }
         }
 
-        private void nextTurn()
-        {
-            if (knocked == false)
-            {
-                knockbutton.Show();
-            }
-
-        }
-
-        private void myTurn()
-        {
-            if (myturnran == false)
-            {
-                DisplayHud();
-
-            }
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             SwapHands();
@@ -418,68 +368,23 @@ namespace NEA
 
         private void knockbutton_Click(object sender, EventArgs e)
         {
-                // Get the current player's name
-                string currentPlayerName = account_page.currentPlayerName;
+            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            {
+                connection.Open();
 
-                // Update the current player's "knocked" status to true
-                string updateQuery = "UPDATE lobby1 SET knocked = true WHERE player_name = @currentPlayerName";
-                using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
-                {
-                    connection.Open();
+                // Update the knocked column for the current player
+                NpgsqlCommand command = new NpgsqlCommand("UPDATE lobby1 SET knocked = TRUE WHERE player_name = @currentPlayerName", connection);
+                command.Parameters.AddWithValue("@currentPlayerName", account_page.currentPlayerName);
+                command.ExecuteNonQuery();
 
-                    using (NpgsqlCommand command = new NpgsqlCommand(updateQuery, connection))
-                    {
-                        command.Parameters.AddWithValue("@currentPlayerName", currentPlayerName);
-                        command.ExecuteNonQuery();
-                    }
-
-                    // Check if anyone has knocked
-                    string selectQuery = "SELECT COUNT(*) FROM lobby1 WHERE knocked = true";
-                    using (NpgsqlCommand command = new NpgsqlCommand(selectQuery, connection))
-                    {
-                        int numPlayersKnocked = Convert.ToInt32(command.ExecuteScalar());
-
-                        // If everyone has knocked, end the game
-                        if (numPlayersKnocked == pCount - 1)
-                        {
-                            // Set game state to finished for all players
-                            NpgsqlCommand finishGameCmd = new NpgsqlCommand("UPDATE lobby1 SET game_state = 'finished'", connection);
-                            finishGameCmd.ExecuteNonQuery();
-
-                            // Determine the next player number and set their game state to playing
-                            int nextPlayerNum = (currentplayernum % pCount) + 1;
-                            NpgsqlCommand nextPlayerCmd = new NpgsqlCommand("UPDATE lobby1 SET game_state = 'playing' WHERE player_num = @playerNum", connection);
-                            nextPlayerCmd.Parameters.AddWithValue("playerNum", nextPlayerNum);
-                            nextPlayerCmd.ExecuteNonQuery();
-
-                            // Close the database connection
-                            connection.Close();
-
-                        // Display the game results
-                        Console.WriteLine("penisssss");
-                            //DisplayResults();
-                        }
-                        // If not everyone has knocked, move to the next player's turn
-                        else
-                        {
-                            // Determine the next player number and set their game state to playing
-                            int nextPlayerNum = (currentplayernum % pCount) + 1;
-                            NpgsqlCommand nextPlayerCmd = new NpgsqlCommand("UPDATE lobby1 SET game_state = 'playing' WHERE player_num = @playerNum", connection);
-                            nextPlayerCmd.Parameters.AddWithValue("playerNum", nextPlayerNum);
-                            nextPlayerCmd.ExecuteNonQuery();
-
-                            // Close the database connection
-                            connection.Close();
-
-                            // Display the next player's turn
-                            DisplayHud();
-                            DisplayCards();
-                        }
-                    }
-                }
-            
-
+                // Close the database connection
+                connection.Close();
+            }
         }
+
+
+
+        
 
         private void togglehide_Click(object sender, EventArgs e)
         {
@@ -491,9 +396,30 @@ namespace NEA
             {
                 turncounter++;
             }
-            if (onlinegame.knocked)
+            // Check if the current player has knocked
+            string queryString = "SELECT knocked FROM lobby1 WHERE player_name = @currentPlayerName";
+            if (currentPlayerKnocked)
             {
-                onlinegame.UpdatePlayerGameState("knocked");
+                MessageBox.Show("Gaming");
+                endGame();
+            }
+
+            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (NpgsqlCommand command = new NpgsqlCommand(queryString, connection))
+                {
+                    command.Parameters.AddWithValue("@currentPlayerName", account_page.currentPlayerName);
+
+                    using (NpgsqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            currentPlayerKnocked = reader.GetBoolean(0);
+                        }
+                    }
+                }
             }
             onlinegame.UpdatePlayerGameState("finished");
             HideHud();
@@ -596,6 +522,11 @@ namespace NEA
 
         }
 
+        public static void endGame()
+        {
+            Console.WriteLine("YOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo");
+        }
+
         private void timer2_Tick(object sender, EventArgs e)
         {
             // Get the current player's name
@@ -632,24 +563,16 @@ namespace NEA
                                     DisplayCards();
                                     break;
                                 case "finished":
-                                    // determine the next player number
-                                    HideHud();
-                                    int nextPlayerNum = currentplayernum;
-                                    if (currentplayernum == onlinelobbies.numPlayersTotal)
-                                    {
-                                        nextPlayerNum = 1;
-                                    }
-                                    else
-                                    {
-                                        nextPlayerNum = (currentplayernum + 1);
-                                    }
-
                                     // update the current player's game_status to "waiting"
                                     NpgsqlCommand updateCurrentPlayerCmd = new NpgsqlCommand("UPDATE lobby1 SET game_state = 'waiting' WHERE player_num = @playerNum", connection);
                                     updateCurrentPlayerCmd.Parameters.AddWithValue("playerNum", currentplayernum);
-                                    Console.WriteLine($"changed {currentplayernum} to waiting");
-
                                     updateCurrentPlayerCmd.ExecuteNonQuery();
+
+                                    Console.WriteLine($"changed {currentplayernum} to waiting");
+                                    // determine the next player number
+                                    HideHud();
+                                    Console.WriteLine($"currentplayernum is apparently {currentplayernum} and apparently there are {onlinelobbies.numPlayersTotal} players");
+                                    int nextPlayerNum = (GetCurrentPlayerNum() % onlinelobbies.numPlayersTotal) + 1;
 
                                     // update the next player's game_status to "playing"
                                     NpgsqlCommand updateNextPlayerCmd = new NpgsqlCommand("UPDATE lobby1 SET game_state = 'playing' WHERE player_num = @playerNum", connection);
@@ -666,7 +589,7 @@ namespace NEA
 
                                     break;
                             }
-                            
+
                         }
 
                         // close the reader and the connection
@@ -675,8 +598,38 @@ namespace NEA
 
                 }
             }
-            
 
+
+        }
+        private int GetCurrentPlayerNum()
+        {
+            string connectionString = "Server=rogue.db.elephantsql.com;Port=5432;Database=cxdvhkfk;User Id=cxdvhkfk;Password=UfAT2N1gBo0FT2L-6n7kfNXgVx_a4pZs;";
+
+            int currentPlayerNum = -1;
+
+            string queryString = "SELECT player_num FROM lobby1 WHERE player_name = @currentPlayerName";
+
+            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (NpgsqlCommand command = new NpgsqlCommand(queryString, connection))
+                {
+                    command.Parameters.AddWithValue("@currentPlayerName", currentPlayerName);
+
+                    using (NpgsqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            currentPlayerNum = reader.GetInt32(0);
+                        }
+                    }
+                }
+
+                connection.Close();
+            }
+
+            return currentPlayerNum;
         }
     }
 }

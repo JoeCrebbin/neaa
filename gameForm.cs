@@ -398,11 +398,6 @@ namespace NEA
             }
             // Check if the current player has knocked
             string queryString = "SELECT knocked FROM lobby1 WHERE player_name = @currentPlayerName";
-            if (currentPlayerKnocked)
-            {
-                MessageBox.Show("Gaming");
-                endGame();
-            }
 
             using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
             {
@@ -417,12 +412,16 @@ namespace NEA
                         if (reader.Read())
                         {
                             currentPlayerKnocked = reader.GetBoolean(0);
+                            onlinegame.UpdatePlayerGameState("end");
+                        }
+                        else
+                        {
+                            onlinegame.UpdatePlayerGameState("finished");
+                            HideHud();
                         }
                     }
                 }
             }
-            onlinegame.UpdatePlayerGameState("finished");
-            HideHud();
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -585,7 +584,7 @@ namespace NEA
 
                                     break;
 
-                                case "ending":
+                                case "end":
 
                                     break;
                             }
